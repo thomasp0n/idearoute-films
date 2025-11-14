@@ -57,6 +57,7 @@ body {
 .loading-screen.hidden {
   opacity: 0;
   visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 .loading-logo {
@@ -1759,11 +1760,21 @@ body {
         ];
 
         // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-            }, 1500);
+        // Hide loading screen faster - use DOMContentLoaded + timeout fallback
+        function hideLoadingScreen() {
+            const loader = document.getElementById('loadingScreen');
+            if (loader) {
+                loader.classList.add('hidden');
+            }
+        }
+
+        // Hide immediately on DOMContentLoaded (faster)
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(hideLoadingScreen, 800); // Quick fade
         });
+
+        // Fallback timeout - if resources take too long, hide anyway
+        setTimeout(hideLoadingScreen, 3000);
 
         // Video Background Setup - Simplified (no enable button)
 const heroVideoContainer = document.getElementById('heroVideoContainer');
