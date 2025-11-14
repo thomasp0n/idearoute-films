@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IdeaRoute Films - You Dream It, We Film It</title>
@@ -181,7 +182,7 @@ body {
   overflow: hidden;
 }
 
-.hero-video-container iframe {
+.hero-video-container video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1421,59 +1422,529 @@ body {
     </style>
 </head>
 <body>
-  <nav class="nav scrolled" id="nav">
-    <div class="nav-container">
-      <a href="#" class="nav-logo"><img src="./assets/logo.png" alt="IdeaRoute Films"></a>
-      <div class="nav-actions">
-      </div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="./assets/logo.png" alt="IdeaRoute Films" class="loading-logo">
     </div>
-  </nav>
 
-  <section class="hero" id="home" style="min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-    <div class="hero-video-container" style="position:absolute;inset:0;">
-      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-        <source src="./assets/videos/showreel.mp4" type="video/mp4">
-      </video>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="./assets/logo.png" alt="IdeaRoute Films">
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero" id="home">
+        <div class="hero-video-container" id="heroVideoContainer">
+            <!-- Video will be loaded here -->
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-label">IdeaRoute Films</div>
+            <h1 class="hero-title">
+                <span class="line">You Dream It,</span>
+                <span class="line">We Film It</span>
+            </h1>
+            <p class="hero-tagline">Transforming Creative Visions Into Cinematic Reality</p>
+            <div class="hero-cta-group">
+                <a href="#portfolio" class="hero-cta primary">View Our Work</a>
+                <a href="#contact" class="hero-cta secondary">Get In Touch</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-hint-line"></div>
+            <div class="scroll-hint-text">Scroll</div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="section-header">
+            <div class="section-label">Our Work</div>
+            <h2 class="section-title gradient-text">Portfolio</h2>
+            <p class="section-description">Discover our collection of award-winning visual stories that push creative boundaries</p>
+        </div>
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="reel">Showreel</button>
+            <button class="filter-btn" data-filter="tvc">Commercials</button>
+            <button class="filter-btn" data-filter="music">Music Videos</button>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="section-header">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title gradient-text">Services</h2>
+            <p class="section-description">Comprehensive production services tailored to elevate your brand</p>
+        </div>
+        <div class="services-grid" id="servicesGrid"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <div class="section-label">About Us</div>
+            <h2 class="section-title gradient-text">Our Story</h2>
+        </div>
+        <div class="about-wrapper">
+            <div class="about-content">
+                <h3>Transforming Ideas Into Visual Masterpieces</h3>
+                <p>IdeaRoute Films is a dynamic film and television production company dedicated to transforming creative concepts into compelling visual stories that captivate audiences worldwide.</p>
+                <p>Our passion lies in crafting original content that resonates deeply with audiences and brings innovative ideas to life on screen. With a team of experienced professionals and state-of-the-art equipment, we deliver exceptional quality in every project we undertake.</p>
+                <a href="#contact" class="about-cta">Start Your Project</a>
+            </div>
+            <div class="about-stats">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Awards Won</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-header">
+            <div class="section-label">Get In Touch</div>
+            <h2 class="section-title gradient-text">Contact</h2>
+            <p class="section-description">Let's collaborate and bring your creative vision to life</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Ready To <span class="highlight">Create</span> Together?</h3>
+                <p>Whether you're looking to create a commercial, music video, or any other visual content, we're here to help make it happen.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-item-content">
+                            <h4>Email Address</h4>
+                            <p>info@idearoutefilms.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-item-content">
+                            <h4>Phone Number</h4>
+                            <p>+94 XX XXX XXXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-item-content">
+                            <h4>Location</h4>
+                            <p>Colombo, Sri Lanka</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" class="form-input" placeholder="Project inquiry" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">
+                    <span>Send Message</span>
+                </button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="./assets/logo.png" alt="IdeaRoute Films">
+                <p>Transforming creative concepts into compelling visual stories that resonate with audiences worldwide. Your vision, our expertise.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Film Production</a></li>
+                    <li><a href="#services">TV Production</a></li>
+                    <li><a href="#services">Commercials</a></li>
+                    <li><a href="#services">Music Videos</a></li>
+                    <li><a href="#services">Post Production</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+                    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                    <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
+                    <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 IdeaRoute Films. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" class="social-link">FB</a>
+                <a href="https://instagram.com" target="_blank" class="social-link">IG</a>
+                <a href="https://youtube.com" target="_blank" class="social-link">YT</a>
+                <a href="https://linkedin.com" target="_blank" class="social-link">LI</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="video-wrapper" id="videoWrapper"></div>
+        </div>
     </div>
-    <div class="hero-overlay" style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(4,4,4,0.6), rgba(4,4,4,0.9));"></div>
-    <div class="hero-content" style="position:relative;z-index:2;text-align:center;padding:2rem;">
-      <div class="hero-label" style="letter-spacing:0.3em;color:var(--color-light);text-transform:uppercase;margin-bottom:1rem;">IdeaRoute Films</div>
-      <h1 class="hero-title" style="font-family: var(--font-black);font-size: clamp(2.2rem,6vw,5rem);line-height:1.1;margin-bottom:1rem;">
-        Site Under Maintenance
-      </h1>
-      <p style="max-width:800px;margin:0 auto 1.5rem;color:#ddd;">We’re upgrading the experience to bring more cinematic stories. We’ll be back shortly.</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a class="btn" href="mailto:hello@idearoutefilms.com" style="background:var(--color-teal);color:white;padding:0.9rem 1.2rem;border-radius:8px;text-decoration:none;">Email Us</a>
-      </div>
-    </div>
-  </section>
 
-  <section style="padding:3rem 1rem;background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.06);">
-    <div style="max-width:1100px;margin:0 auto;display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
-      <div style="background:rgba(255,255,255,0.03);padding:1.25rem;border:1px solid rgba(255,255,255,0.06);border-radius:12px;">
-        <div style="color:var(--color-gold);margin-bottom:0.5rem;">Status</div>
-        <div>Scheduled maintenance in progress.</div>
-      </div>
-      <div style="background:rgba(255,255,255,0.03);padding:1.25rem;border:1px solid rgba(255,255,255,0.06);border-radius:12px;">
-        <div style="color:var(--color-teal);margin-bottom:0.5rem;">ETA</div>
-        <div>Back online within 24 hours.</div>
-      </div>
-      <div style="background:rgba(255,255,255,0.03);padding:1.25rem;border:1px solid rgba(255,255,255,0.06);border-radius:12px;">
-        <div style="color:var(--color-red);margin-bottom:0.5rem;">Support</div>
-        <div>+94 75 200 5858</div>
-      </div>
-    </div>
-  </section>
+    <script>
+        // Portfolio Data
+        const portfolioProjects = [
+            {
+                title: "Show Reel 2024",
+                category: "reel",
+                youtubeId: "sQk8NkhT8UU",
+                thumbnail: "https://img.youtube.com/vi/sQk8NkhT8UU/maxresdefault.jpg"
+            },
+            {
+                title: "Rainco - Guru Panduru TVC",
+                category: "tvc",
+                youtubeId: "8ZVcz7cMAi4",
+                thumbnail: "https://img.youtube.com/vi/8ZVcz7cMAi4/maxresdefault.jpg"
+            },
+            {
+                title: "Arpico Super Center - Christmas TVC",
+                category: "tvc",
+                youtubeId: "nRAb_AzfN00",
+                thumbnail: "./assets/arpico-tvc.png'
+            },
+            {
+                title: "Matta Matti - Sunny Austin",
+                category: "music",
+                youtubeId: "iHitM-uVmwE",
+                thumbnail: "https://img.youtube.com/vi/iHitM-uVmwE/maxresdefault.jpg"
+            },
+            {
+                title: "DULUX SuperKote TVC",
+                category: "tvc",
+                youtubeId: "e3r3atWHYkk",
+                thumbnail: "https://img.youtube.com/vi/e3r3atWHYkk/maxresdefault.jpg"
+            },
+            {
+                title: "Hasangana - Tilan GT x Poppunk",
+                category: "music",
+                youtubeId: "ZDUMvC_WNsk",
+                thumbnail: "https://img.youtube.com/vi/ZDUMvC_WNsk/maxresdefault.jpg"
+            }
+        ];
 
-  <footer style="padding:2rem 1rem;background:#060606;border-top:1px solid rgba(255,255,255,0.06);text-align:center;color:#aaa;">
-    <img src="./assets/logo.png" alt="IdeaRoute Films" style="height:28px;opacity:0.9;filter:grayscale(10%);margin-bottom:0.8rem;"/>
-    <div>© {year} IdeaRoute Films. All rights reserved.</div>
-  </footer>
+        // Services Data
+        const services = [
+            {
+                number: "01",
+                icon: "🎬",
+                title: "Film Production",
+                description: "Original content creation from concept to screen with cinematic excellence and storytelling mastery"
+            },
+            {
+                number: "02",
+                icon: "📺",
+                title: "Television Production",
+                description: "Commercial and episodic content crafted for broadcast excellence and audience engagement"
+            },
+            {
+                number: "03",
+                icon: "📹",
+                title: "Commercial Production",
+                description: "Brand storytelling through impactful and memorable TVCs that drive results"
+            },
+            {
+                number: "04",
+                icon: "🎵",
+                title: "Music Video Production",
+                description: "Artistic visual narratives that amplify musical expression and artist identity"
+            },
+            {
+                number: "05",
+                icon: "🎨",
+                title: "Creative Direction",
+                description: "Concept development and artistic vision that brings your brand story to life"
+            },
+            {
+                number: "06",
+                icon: "✂️",
+                title: "Post Production",
+                description: "Professional editing, VFX, color grading, and finishing for polished results"
+            }
+        ];
 
-  <script>
-    // Replace year
-    document.currentScript.previousElementSibling.innerHTML = document.currentScript.previousElementSibling.innerHTML.replace('{year}', new Date().getFullYear());
-  </script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Video Background Setup - Simplified (no enable button)
+const heroVideoContainer = document.getElementById('heroVideoContainer');
+
+function loadHeroVideo() {
+    // Clear previous content if any
+    heroVideoContainer.innerHTML = '';
+
+    // Create HTML5 video element for local playback
+    const video = document.createElement('video');
+
+    // Set video source to local GitHub asset
+    video.src = './assets/videos/IdeaRoute-Films-Show-Reel.mp4';
+    video.type = 'video/mp4';
+
+    // Video settings
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsinline = true;
+    video.playsInline = true;
+
+    // Styling to fill container
+    video.style.width = '100%';
+    video.style.height = '100%';
+    video.style.objectFit = 'cover';
+    video.style.objectPosition = 'center';
+    video.style.display = 'block';
+
+    // Add to page
+    heroVideoContainer.appendChild(video);
+}
+
+
+        // Load video on page load
+        loadHeroVideo();
+
+        // Navigation Scroll Effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Render Portfolio
+        const portfolioGrid = document.getElementById('portfolioGrid');
+        portfolioProjects.forEach((project, index) => {
+            const item = document.createElement('div');
+            item.className = 'portfolio-item';
+            item.dataset.category = project.category;
+            item.style.transitionDelay = `${index * 0.1}s`;
+            item.innerHTML = `
+                <img src="${project.thumbnail}" alt="${project.title}" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-category">${project.category}</div>
+                    <h3 class="portfolio-title">${project.title}</h3>
+                </div>
+                <div class="play-button"></div>
+            `;
+            item.addEventListener('click', () => openModal(project.youtubeId));
+            portfolioGrid.appendChild(item);
+        });
+
+        // Portfolio Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const items = document.querySelectorAll('.portfolio-item');
+                items.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.classList.remove('hidden');
+                        setTimeout(() => item.classList.add('visible'), 10);
+                    } else {
+                        item.classList.add('hidden');
+                        item.classList.remove('visible');
+                    }
+                });
+            });
+        });
+
+        // Render Services
+        const servicesGrid = document.getElementById('servicesGrid');
+        services.forEach((service, index) => {
+            const card = document.createElement('div');
+            card.className = 'service-card';
+            card.style.transitionDelay = `${index * 0.1}s`;
+            card.innerHTML = `
+                <div class="service-number">${service.number}</div>
+                <div class="service-icon">${service.icon}</div>
+                <h3 class="service-title">${service.title}</h3>
+                <p class="service-description">${service.description}</p>
+            `;
+            servicesGrid.appendChild(card);
+        });
+
+        // Modal Functions
+        const modal = document.getElementById('videoModal');
+        const modalClose = document.getElementById('modalClose');
+        const videoWrapper = document.getElementById('videoWrapper');
+
+        function openModal(youtubeId) {
+            // Use autoplay=1 to ensure video plays when modal opens
+            const iframe = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            videoWrapper.innerHTML = iframe;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            videoWrapper.innerHTML = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && subject && message) {
+                formMessage.textContent = 'Thank you for your message! We\'ll get back to you soon.';
+                formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
+                contactForm.reset();
+            } else {
+                formMessage.textContent = 'Please fill in all fields.';
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
+            }
+            
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.portfolio-item').forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+    </script>
 </body>
-
 </html>
