@@ -1747,15 +1747,15 @@ function loadHeroVideo() {
     heroVideoContainer.innerHTML = '';
 
     // Create iframe for Google Drive preview
-    const iframe = document.createElement('iframe');
+    const iframe = document.createElement('video');
     
     // Use /preview instead of /view and add params
-    iframe.src = 'https://drive.google.com/file/d/1zhslnEub6J6Z87M8UG6E-d0ykUaSYV15/view?autoplay=1&loop=1&mute=1';
+    iframe.src = './assets/videos/IdeaRoute Films (Show Reel).mp4';
     
     // Make it behave like a background video
-    iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('allowfullscreen', 'true');
-    iframe.setAttribute('allow', 'autoplay; encrypted-media');
+    
+    
+    
     
     // Optional: make it fill the container
     iframe.style.width = '100%';
