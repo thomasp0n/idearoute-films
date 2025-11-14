@@ -182,7 +182,7 @@ body {
   overflow: hidden;
 }
 
-.hero-video-container iframe {
+.hero-video-container video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1746,22 +1746,29 @@ function loadHeroVideo() {
     // Clear previous content if any
     heroVideoContainer.innerHTML = '';
 
-    // Create iframe for Google Drive preview
-    const iframe = document.createElement('video');
-    
-    // Use /preview instead of /view and add params
-    iframe.src = './assets/videos/IdeaRoute Films (Show Reel).mp4';
-    
-    // Make it behave like a background video
-    
-    
-    
-    
-    // Optional: make it fill the container
-    iframe.style.width = '100%';
-    iframe.style.height = '100%';
-    
-    heroVideoContainer.appendChild(iframe);
+    // Create HTML5 video element for local playback
+    const video = document.createElement('video');
+
+    // Set video source to local GitHub asset
+    video.src = './assets/videos/IdeaRoute Films (Show Reel).mp4';
+    video.type = 'video/mp4';
+
+    // Video settings
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsinline = true;
+    video.playsInline = true;
+
+    // Styling to fill container
+    video.style.width = '100%';
+    video.style.height = '100%';
+    video.style.objectFit = 'cover';
+    video.style.objectPosition = 'center';
+    video.style.display = 'block';
+
+    // Add to page
+    heroVideoContainer.appendChild(video);
 }
 
 
