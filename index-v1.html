@@ -7,16 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo+Black&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Slick Slider CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Animated Background Particles -->
     <div class="particles" id="particles"></div>
 
-    <!-- Modern Loading Screen
+    <!-- Modern Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-bars">
@@ -28,7 +25,7 @@
             </div>
             <div class="loading-text">Loading...</div>
         </div>
-    </div>  -->
+    </div>
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
@@ -43,7 +40,7 @@
             </button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link">Home</a></li>
-                
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -67,7 +64,7 @@
             </h1>
             <p class="hero-tagline">Transforming Creative Visions Into Cinematic Reality</p>
             <div class="hero-cta-group">
-                <a href="#services" class="hero-cta primary">View Our Services</a>
+                <a href="#portfolio" class="hero-cta primary">View Our Work</a>
                 <a href="#contact" class="hero-cta secondary">Get In Touch</a>
             </div>
         </div>
@@ -75,6 +72,22 @@
             <div class="scroll-hint-line"></div>
             <div class="scroll-hint-text">Scroll</div>
         </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="section-header">
+            <div class="section-label">Our Work</div>
+            <h2 class="section-title gradient-text">Portfolio</h2>
+            <p class="section-description">Discover our collection of award-winning visual stories that push creative boundaries</p>
+        </div>
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="reel">Showreel</button>
+            <button class="filter-btn" data-filter="tvc">Commercials</button>
+            <button class="filter-btn" data-filter="music">Music Videos</button>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid"></div>
     </section>
 
     <!-- Services Section -->
@@ -85,20 +98,6 @@
             <p class="section-description">Our Core Production Services tailored to elevate your brand</p>
         </div>
         <div class="services-grid" id="servicesGrid"></div>
-    </section>
-
-    <!-- Selected Clients Section -->
-    <section class="section clients-section" id="clients">
-        <div class="section-header">
-            <div class="section-label">Trusted Partnerships</div>
-            <h2 class="section-title gradient-text">Selected Clients</h2>
-            <p class="section-description">Proud to collaborate with leading brands and innovative companies worldwide</p>
-        </div>
-        <div class="clients-slider-container">
-            <div class="clients-slider" id="clientsSlider">
-                <!-- Client logos will be dynamically inserted here -->
-            </div>
-        </div>
     </section>
 
     <!-- About Section -->
@@ -143,7 +142,7 @@
             <p class="section-description">Let's collaborate and bring your creative vision to life</p>
         </div>
         <div class="contact-container">
-            <div class="contact-info-centered">
+            <div class="contact-info">
                 <h3>Ready To <span class="highlight">Create</span> Together?</h3>
                 <p>Whether you're looking to create a commercial, music video, or any other visual content, we're here to help make it happen.</p>
                 <div class="contact-details">
@@ -151,7 +150,7 @@
                         <div class="contact-icon">📧</div>
                         <div class="contact-item-content">
                             <h4>Email Address</h4>
-                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b636e6767644b626f6e6a79647e7f6e6d6267667825686466">[email&#160;protected]</a></p>
+                            <p>hello@idearoutefilms.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -170,20 +169,30 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section class="section partners-section">
-        <div class="section-header">
-            <div class="section-label">Trusted By</div>
-            <h2 class="section-title gradient-text">Our Partners</h2>
-            <p class="section-description">Collaborating with industry leaders and innovative brands</p>
-        </div>
-        <div class="partners-slider">
-            <div class="partners-track" id="partnersTrack">
-                <!-- Logos will be dynamically inserted here -->
-            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" class="form-input" placeholder="Project inquiry" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">
+                    <span>Send Message</span>
+                </button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
         </div>
     </section>
 
@@ -198,7 +207,7 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    
+                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -251,4 +260,10 @@
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            <div 
+            <div class="video-wrapper" id="videoWrapper"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
