@@ -15,7 +15,75 @@ function createParticles() {
 
 createParticles();
 
-
+// Portfolio Data with correct YouTube video titles
+const portfolioProjects = [
+    {
+        title: "IdeaRoute Films - Showreel 2024",
+        category: "reel",
+        youtubeId: "sQk8NkhT8UU",
+        thumbnail: "https://img.youtube.com/vi/sQk8NkhT8UU/maxresdefault.jpg"
+    },
+    {
+        title: "Rainco - Guru Panduru TVC",
+        category: "tvc",
+        youtubeId: "8ZVcz7cMAi4",
+        thumbnail: "https://img.youtube.com/vi/8ZVcz7cMAi4/maxresdefault.jpg"
+    },
+    {
+        title: "Arpico Super Center - Christmas TVC",
+        category: "tvc",
+        youtubeId: "nRAb_AzfN00",
+        thumbnail: "https://img.youtube.com/vi/nRAb_AzfN00/hqdefault.jpg"
+    },
+    {
+        title: "Matta Matti - Sunny Austin ft. Hirushi Jayasena",
+        category: "music",
+        youtubeId: "iHitM-uVmwE",
+        thumbnail: "https://img.youtube.com/vi/iHitM-uVmwE/maxresdefault.jpg"
+    },
+    {
+        title: "DULUX SuperKote - Favorite Color TVC",
+        category: "tvc",
+        youtubeId: "e3r3atWHYkk",
+        thumbnail: "https://img.youtube.com/vi/e3r3atWHYkk/maxresdefault.jpg"
+    },
+    {
+        title: "Hasangana - Tilan GT x Poppunk",
+        category: "music",
+        youtubeId: "ZDUMvC_WNsk",
+        thumbnail: "https://img.youtube.com/vi/ZDUMvC_WNsk/maxresdefault.jpg"
+    },
+    {
+        title: "Kolam Natannata - Nadeemal Perera",
+        category: "music",
+        youtubeId: "z-PAp-WOYcA",
+        thumbnail: "https://img.youtube.com/vi/z-PAp-WOYcA/maxresdefault.jpg"
+    },
+    {
+        title: "Sithuvili - Eranga UG, Chandralekha Perera & Rookantha Goonatillake",
+        category: "music",
+        youtubeId: "GlIRiOYc6lM",
+        thumbnail: "https://img.youtube.com/vi/GlIRiOYc6lM/maxresdefault.jpg"
+    },
+    {
+        title: "Hadakari - Nadeemal Perera X Pasan Liyanage",
+        category: "music",
+        youtubeId: "DQQcqDqMhsM",
+        thumbnail: "https://img.youtube.com/vi/DQQcqDqMhsM/maxresdefault.jpg"
+    },
+    {
+        title: "Mayam Kirilli - Ishan Lantra",
+        category: "music",
+        youtubeId: "elHHfhqwYNY",
+        thumbnail: "https://img.youtube.com/vi/elHHfhqwYNY/maxresdefault.jpg"
+    },
+    {
+        title: "Veenavi - Iraj Ft. Ashanya, Neo & Jay Princce",
+        category: "music",
+        youtubeId: "MtAXfij4x00",
+        thumbnail: "https://img.youtube.com/vi/MtAXfij4x00/maxresdefault.jpg"
+    }
+];
 
 // Updated Services Data
 const services = [
@@ -75,49 +143,6 @@ const services = [
     }
 ];
 
-// Partners Data - Demo Logos
-const partners = [
-    { name: "Partner 1", logo: "https://www.myarpico.com/images/logo-white.png" },
-    { name: "Partner 2", logo: "https://via.placeholder.com/180x100/E19B20/FFFFFF?text=Partner+2" },
-    { name: "Partner 3", logo: "https://via.placeholder.com/180x100/99241C/FFFFFF?text=Partner+3" },
-    { name: "Partner 4", logo: "https://via.placeholder.com/180x100/1E8A8B/FFFFFF?text=Partner+4" },
-    { name: "Partner 5", logo: "https://via.placeholder.com/180x100/E19B20/FFFFFF?text=Partner+5" },
-    { name: "Partner 6", logo: "https://via.placeholder.com/180x100/99241C/FFFFFF?text=Partner+6" },
-    { name: "Partner 7", logo: "https://via.placeholder.com/180x100/1E8A8B/FFFFFF?text=Partner+7" },
-    { name: "Partner 8", logo: "https://via.placeholder.com/180x100/E19B20/FFFFFF?text=Partner+8" },
-];
-
-// Selected Clients Data - 25 Popular Companies with Real Logos
-const clients = [
-    { name: "Apple", logo: "https://www.myarpico.com/images/logo-white.png", url: "https://www.apple.com" },
-    { name: "Microsoft", logo: "https://logo.clearbit.com/microsoft.com", url: "https://www.microsoft.com" },
-    { name: "Google", logo: "https://logo.clearbit.com/google.com", url: "https://www.google.com" },
-    { name: "Amazon", logo: "https://logo.clearbit.com/amazon.com", url: "https://www.amazon.com" },
-    { name: "Netflix", logo: "https://logo.clearbit.com/netflix.com", url: "https://www.netflix.com" },
-    { name: "Nike", logo: "https://logo.clearbit.com/nike.com", url: "https://www.nike.com" },
-    { name: "Adidas", logo: "https://logo.clearbit.com/adidas.com", url: "https://www.adidas.com" },
-    { name: "Coca-Cola", logo: "https://logo.clearbit.com/coca-cola.com", url: "https://www.coca-cola.com" },
-    { name: "Pepsi", logo: "https://logo.clearbit.com/pepsi.com", url: "https://www.pepsi.com" },
-    { name: "Samsung", logo: "https://logo.clearbit.com/samsung.com", url: "https://www.samsung.com" },
-    { name: "Sony", logo: "https://logo.clearbit.com/sony.com", url: "https://www.sony.com" },
-    { name: "Intel", logo: "https://logo.clearbit.com/intel.com", url: "https://www.intel.com" },
-    { name: "IBM", logo: "https://logo.clearbit.com/ibm.com", url: "https://www.ibm.com" },
-    { name: "Oracle", logo: "https://logo.clearbit.com/oracle.com", url: "https://www.oracle.com" },
-    { name: "Spotify", logo: "https://logo.clearbit.com/spotify.com", url: "https://www.spotify.com" },
-    { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com", url: "https://www.adobe.com" },
-    { name: "Tesla", logo: "https://logo.clearbit.com/tesla.com", url: "https://www.tesla.com" },
-    { name: "BMW", logo: "https://logo.clearbit.com/bmw.com", url: "https://www.bmw.com" },
-    { name: "Mercedes-Benz", logo: "https://logo.clearbit.com/mercedes-benz.com", url: "https://www.mercedes-benz.com" },
-    { name: "Toyota", logo: "https://logo.clearbit.com/toyota.com", url: "https://www.toyota.com" },
-    { name: "HP", logo: "https://logo.clearbit.com/hp.com", url: "https://www.hp.com" },
-    { name: "Dell", logo: "https://logo.clearbit.com/dell.com", url: "https://www.dell.com" },
-    { name: "Starbucks", logo: "https://logo.clearbit.com/starbucks.com", url: "https://www.starbucks.com" },
-    { name: "McDonald's", logo: "https://logo.clearbit.com/mcdonalds.com", url: "https://www.mcdonalds.com" },
-    { name: "Facebook", logo: "https://logo.clearbit.com/facebook.com", url: "https://www.facebook.com" }
-];
-
-
-
 // Loading Screen
 window.addEventListener('load', () => {
     setTimeout(() => {
@@ -152,7 +177,26 @@ navLinks.forEach(link => {
     });
 });
 
+// Render Portfolio
+const portfolioGrid = document.getElementById('portfolioGrid');
+portfolioProjects.forEach((project, index) => {
+    const item = document.createElement('div');
+    item.className = 'portfolio-item';
+    item.dataset.category = project.category;
+    item.style.transitionDelay = `${index * 0.1}s`;
+    item.innerHTML = `
+        <img src="${project.thumbnail}" alt="${project.title}" class="portfolio-image">
+        <div class="portfolio-overlay">
+            <div class="portfolio-category">${project.category}</div>
+            <h3 class="portfolio-title">${project.title}</h3>
+        </div>
+        <div class="play-button"></div>
+    `;
+    item.addEventListener('click', () => openModal(project.youtubeId));
+    portfolioGrid.appendChild(item);
+});
 
+// Portfolio Filter
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -189,20 +233,6 @@ services.forEach((service, index) => {
     servicesGrid.appendChild(card);
 });
 
-// Render Partners with infinite scroll
-const partnersTrack = document.getElementById('partnersTrack');
-if (partnersTrack) {
-    // Duplicate partners array for seamless loop
-    const duplicatedPartners = [...partners, ...partners];
-    
-    duplicatedPartners.forEach(partner => {
-        const logoDiv = document.createElement('div');
-        logoDiv.className = 'partner-logo';
-        logoDiv.innerHTML = `<img src="${partner.logo}" alt="${partner.name}">`;
-        partnersTrack.appendChild(logoDiv);
-    });
-}
-
 // Modal Functions
 const modal = document.getElementById('videoModal');
 const modalClose = document.getElementById('modalClose');
@@ -230,7 +260,33 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
 });
 
+// Form Submission
+const contactForm = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
 
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    if (name && email && subject && message) {
+        formMessage.textContent = 'Thank you for your message! We\'ll get back to you soon.';
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+        contactForm.reset();
+    } else {
+        formMessage.textContent = 'Please fill in all fields.';
+        formMessage.className = 'form-message error';
+        formMessage.style.display = 'block';
+    }
+    
+    setTimeout(() => {
+        formMessage.style.display = 'none';
+    }, 5000);
+});
 
 // Scroll Reveal Animation
 const observerOptions = {
@@ -246,7 +302,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-
+document.querySelectorAll('.portfolio-item').forEach(el => observer.observe(el));
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -262,66 +318,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// Render and Initialize Selected Clients Slider
-const clientsSlider = document.getElementById('clientsSlider');
-if (clientsSlider) {
-    clients.forEach(client => {
-        const clientWrapper = document.createElement('div');
-        clientWrapper.className = 'client-logo-wrapper';
-        clientWrapper.innerHTML = `
-            <a href="${client.url}" target="_blank" class="client-logo" rel="noopener noreferrer">
-                <img src="${client.logo}" alt="${client.name}" onerror="this.src='https://via.placeholder.com/200x80/1E8A8B/FFFFFF?text=${client.name}'">
-            </a>
-        `;
-        clientsSlider.appendChild(clientWrapper);
-    });
-
-    // Initialize Slick Slider with jQuery
-    $(document).ready(function(){
-        $('#clientsSlider').slick({
-            rows: 2,
-            slidesPerRow: 5,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            dots: true,
-            arrows: true,
-            infinite: true,
-            pauseOnHover: true,
-            responsive: [
-                {
-                    breakpoint: 1400,
-                    settings: {
-                        rows: 2,
-                        slidesPerRow: 4
-                    }
-                },
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        rows: 2,
-                        slidesPerRow: 3
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        rows: 2,
-                        slidesPerRow: 2
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        rows: 1,
-                        slidesPerRow: 2,
-                        arrows: false
-                    }
-                }
-            ]
-        });
-    });
-}
-
