@@ -3,622 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IdeaRoute Films - Site Under Maintenance</title>
+    <title>IdeaRoute Films - You Dream It, We Film It</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo+Black&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-:root {
-  --color-dark: #040404;
-  --color-light: #C8C1C1;
-  --color-teal: #138A8D;
-  --color-red: #A12A17;
-  --color-gold: #DB9112;
-  --color-white: #FFFFFF;
-  --font-primary: 'Outfit', sans-serif;
-  --font-display: 'Bebas Neue', cursive;
-  --font-black: 'Archivo Black', sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
-
-body {
-  font-family: var(--font-primary);
-  background: var(--color-dark);
-  color: var(--color-white);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-/* Cinematic fade-in on page load */
-@keyframes pageLoad {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-body {
-  animation: pageLoad 1.2s ease-out;
-}
-
-/* Navigation */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  padding: 1rem 0;
-  background: rgba(4, 4, 4, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(19, 138, 141, 0.15);
-  animation: slideDown 0.8s ease-out;
-}
-
-@keyframes slideDown {
-  0% { transform: translateY(-100%); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-.nav-container {
-  max-width: 1800px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-logo img {
-  height: 38px;
-  filter: brightness(1.05);
-  transition: transform 0.4s ease, filter 0.4s ease;
-}
-
-.nav-logo:hover img {
-  transform: scale(1.05);
-  filter: brightness(1.2);
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.85rem 1.6rem;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.4s ease;
-  background: var(--color-teal);
-  color: white;
-  border: 2px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
-}
-
-.btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(19, 138, 141, 0.4);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--color-gold);
-  color: var(--color-gold);
-}
-
-.btn-outline:hover {
-  background: var(--color-gold);
-  color: var(--color-dark);
-  box-shadow: 0 10px 30px rgba(219, 145, 18, 0.4);
-}
-
-/* Hero Section */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero-video-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.hero-video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: brightness(0.7);
-  animation: videoZoom 25s ease-in-out infinite alternate;
-}
-
-@keyframes videoZoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.08); }
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(4, 4, 4, 0.5) 0%,
-    rgba(4, 4, 4, 0.75) 50%,
-    rgba(4, 4, 4, 0.95) 100%
-  );
-  animation: overlayPulse 6s ease-in-out infinite;
-}
-
-@keyframes overlayPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.92; }
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 2rem;
-  max-width: 1100px;
-  animation: fadeInUp 1.5s ease-out 0.3s both;
-}
-
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.hero-label {
-  letter-spacing: 0.35em;
-  color: var(--color-teal);
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  animation: fadeIn 1.8s ease-out 0.6s both;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-.hero-title {
-  font-family: var(--font-black);
-  font-size: clamp(2.5rem, 7vw, 6rem);
-  line-height: 1.05;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #fff 0%, #ddd 50%, #fff 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 4s ease infinite, titleGlow 2s ease-out 1s both;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes titleGlow {
-  0% { filter: drop-shadow(0 0 0 transparent); }
-  100% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.3)); }
-}
-
-.hero-subtitle {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-  max-width: 850px;
-  margin: 0 auto 2.5rem;
-  color: #ddd;
-  line-height: 1.7;
-  animation: fadeInUp 1.8s ease-out 0.9s both;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 1.25rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  animation: fadeInUp 2s ease-out 1.2s both;
-}
-
-/* Particles Background */
-.particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: rgba(255,255,255,0.6);
-  border-radius: 50%;
-  animation: particleFloat 12s linear infinite;
-}
-
-@keyframes particleFloat {
-  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-  10% { opacity: 0.8; }
-  90% { opacity: 0.8; }
-  100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-}
-
-.particle:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; }
-.particle:nth-child(2) { left: 25%; animation-duration: 14s; animation-delay: 2s; }
-.particle:nth-child(3) { left: 40%; animation-duration: 11s; animation-delay: 4s; }
-.particle:nth-child(4) { left: 60%; animation-duration: 13s; animation-delay: 1s; }
-.particle:nth-child(5) { left: 75%; animation-duration: 15s; animation-delay: 3s; }
-.particle:nth-child(6) { left: 90%; animation-duration: 12s; animation-delay: 5s; }
-
-/* Status Section */
-.status-section {
-  padding: 4rem 1rem;
-  background: #0a0a0a;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  position: relative;
-}
-
-.status-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1px;
-  height: 80px;
-  background: linear-gradient(to bottom, var(--color-teal), transparent);
-  transform: translateX(-50%);
-  animation: lineGrow 1.5s ease-out;
-}
-
-@keyframes lineGrow {
-  0% { height: 0; }
-  100% { height: 80px; }
-}
-
-.status-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.status-card {
-  background: rgba(255,255,255,0.03);
-  padding: 1.8rem;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s ease;
-  animation: cardSlideUp 0.8s ease-out both;
-}
-
-.status-card:nth-child(1) { animation-delay: 0.2s; }
-.status-card:nth-child(2) { animation-delay: 0.4s; }
-.status-card:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes cardSlideUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.status-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-  transition: left 0.8s ease;
-}
-
-.status-card:hover::before {
-  left: 100%;
-}
-
-.status-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(19, 138, 141, 0.3);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-}
-
-.status-label {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.status-card:nth-child(1) .status-label { color: var(--color-gold); }
-.status-card:nth-child(2) .status-label { color: var(--color-teal); }
-.status-card:nth-child(3) .status-label { color: var(--color-red); }
-
-.status-value {
-  font-size: 1.05rem;
-  color: #ddd;
-  line-height: 1.6;
-}
-
-/* Progress Bar */
-.progress-container {
-  margin-top: 3rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  animation: fadeInUp 1s ease-out 1s both;
-}
-
-.progress-label {
-  font-size: 0.9rem;
-  color: var(--color-light);
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-teal), var(--color-gold));
-  border-radius: 10px;
-  animation: progressFill 3s ease-out forwards;
-  position: relative;
-  overflow: hidden;
-}
-
-@keyframes progressFill {
-  0% { width: 0%; }
-  100% { width: 70%; }
-}
-
-.progress-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: progressShine 2s ease-in-out infinite;
-}
-
-@keyframes progressShine {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-
-/* Footer */
-.footer {
-  padding: 2.5rem 1rem;
-  background: #060606;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  text-align: center;
-  color: #999;
-}
-
-.footer-logo {
-  height: 32px;
-  opacity: 0.85;
-  margin-bottom: 1rem;
-  filter: grayscale(5%);
-  transition: all 0.4s ease;
-}
-
-.footer-logo:hover {
-  opacity: 1;
-  filter: grayscale(0%) brightness(1.1);
-}
-
-.footer-text {
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .status-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-container {
-    padding: 0 1rem;
-  }
-}
-
-/* Glitch effect on title hover */
-.hero-title:hover {
-  animation: glitch 0.3s ease-in-out;
-}
-
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
-}
-
-/* Spotlight effect */
-.spotlight {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(19,138,141,0.15) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-  animation: spotlightMove 20s ease-in-out infinite;
-}
-
-@keyframes spotlightMove {
-  0%, 100% { top: 20%; left: 10%; }
-  50% { top: 60%; left: 80%; }
-}
-
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">
-        <img src="./assets/logo.png" alt="IdeaRoute Films">
-      </a>
-      <div class="nav-actions">
-      </div>
-    </div>
-  </nav>
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <!-- Video Background -->
-    <div class="hero-video-container">
-      <video autoplay muted loop playsinline>
-        <source src="./assets/videos/showreel.mp4" type="video/mp4">
-      </video>
+    <!-- Modern Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-bars">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            <div class="loading-text">Loading...</div>
+        </div>
     </div>
 
-    <!-- Animated Particles -->
-    <div class="particles">
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="assets/logo.png" alt="IdeaRoute Films">
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero" id="home">
+        <div class="hero-video-container" id="heroVideoContainer">
+            <video autoplay muted loop playsinline>
+                <source src="assets/videos/IdeaRoute-Films-Show-Reel.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-label">IdeaRoute Films</div>
+            <h1 class="hero-title">
+                <span class="line line-1">You Dream It,</span>
+                <span class="line line-2">We Film It</span>
+            </h1>
+            <p class="hero-tagline">Transforming Creative Visions Into Cinematic Reality</p>
+            <div class="hero-cta-group">
+                <a href="#portfolio" class="hero-cta primary">View Our Work</a>
+                <a href="#contact" class="hero-cta secondary">Get In Touch</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-hint-line"></div>
+            <div class="scroll-hint-text">Scroll</div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="section-header">
+            <div class="section-label">Our Work</div>
+            <h2 class="section-title gradient-text">Portfolio</h2>
+            <p class="section-description">Discover our collection of award-winning visual stories that push creative boundaries</p>
+        </div>
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="reel">Showreel</button>
+            <button class="filter-btn" data-filter="tvc">Commercials</button>
+            <button class="filter-btn" data-filter="music">Music Videos</button>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="section-header">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title gradient-text">Services</h2>
+            <p class="section-description">Our Core Production Services tailored to elevate your brand</p>
+        </div>
+        <div class="services-grid" id="servicesGrid"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <div class="section-label">About Us</div>
+            <h2 class="section-title gradient-text">Our Story</h2>
+        </div>
+        <div class="about-wrapper">
+            <div class="about-content">
+                <h3>Transforming Ideas Into Visual Masterpieces</h3>
+                <p>IdeaRoute Films is a dynamic film and television production company dedicated to transforming creative concepts into compelling visual stories that captivate audiences worldwide.</p>
+                <p>Our passion lies in crafting original content that resonates deeply with audiences and brings innovative ideas to life on screen. With a team of experienced professionals and state-of-the-art equipment, we deliver exceptional quality in every project we undertake.</p>
+                <a href="#contact" class="about-cta">Start Your Project</a>
+            </div>
+            <div class="about-stats">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Awards Won</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-header">
+            <div class="section-label">Get In Touch</div>
+            <h2 class="section-title gradient-text">Contact</h2>
+            <p class="section-description">Let's collaborate and bring your creative vision to life</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Ready To <span class="highlight">Create</span> Together?</h3>
+                <p>Whether you're looking to create a commercial, music video, or any other visual content, we're here to help make it happen.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-item-content">
+                            <h4>Email Address</h4>
+                            <p>hello@idearoutefilms.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-item-content">
+                            <h4>Phone Number</h4>
+                            <p>+94 76 707 2025</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-item-content">
+                            <h4>Location</h4>
+                            <p>Colombo, Sri Lanka</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" class="form-input" placeholder="Project inquiry" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">
+                    <span>Send Message</span>
+                </button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="IdeaRoute Films">
+                <p>Transforming creative concepts into compelling visual stories that resonate with audiences worldwide. Your vision, our expertise.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">TV Commercials</a></li>
+                    <li><a href="#services">Digital Films</a></li>
+                    <li><a href="#services">Music Videos</a></li>
+                    <li><a href="#services">Documentary Films</a></li>
+                    <li><a href="#services">VFX & Post Production</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 IdeaRoute Films. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/idearoutefilms/" target="_blank" class="social-link" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/idearoutefilms/" target="_blank" class="social-link" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/@IdeaRouteFilmsLK" target="_blank" class="social-link" aria-label="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                    </svg>
+                </a>
+                <!-- <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer> -->
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="video-wrapper" id="videoWrapper"></div>
+        </div>
     </div>
 
-    <!-- Spotlight Effect -->
-    <div class="spotlight"></div>
-
-    <!-- Overlay -->
-    <div class="hero-overlay"></div>
-
-    <!-- Hero Content -->
-    <div class="hero-content">
-      <div class="hero-label">IdeaRoute Films</div>
-      <h1 class="hero-title">We're Crafting Something Extraordinary</h1>
-      <p class="hero-subtitle">
-        Our digital canvas is being reimagined. We're upgrading the experience to bring you more cinematic stories, 
-        immersive visuals, and unforgettable moments. Stay tuned—greatness is coming.
-      </p>
-      <div class="hero-cta">
-        <a class="btn" href="mailto:hello@idearoutefilms.com">Get In Touch</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Status Section -->
-  <section class="status-section">
-    <div class="status-grid">
-      <div class="status-card">
-        <div class="status-label">⚡ Status</div>
-        <div class="status-value">Scheduled maintenance in progress. All systems being upgraded.</div>
-      </div>
-      <div class="status-card">
-        <div class="status-label">⏱️ Estimated Time</div>
-        <div class="status-value">We'll be back online within 24 hours. Check back soon!</div>
-      </div>
-      <div class="status-card">
-        <div class="status-label">📞 Support</div>
-        <div class="status-value">+94 76 707 2025<br></div>
-      </div>
-    </div>
-
-    <!-- Progress Bar -->
-    <div class="progress-container">
-      <div class="progress-label">Upgrade Progress</div>
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <img src="./assets/logo.png" alt="IdeaRoute Films" class="footer-logo">
-    <div class="footer-text">© 2025 IdeaRoute Films. All rights reserved.</div>
-  </footer>
-
-  <script>
-    // Update year dynamically
-    const year = new Date().getFullYear();
-    document.querySelector('.footer-text').textContent = `© ${year} IdeaRoute Films. All rights reserved.`;
-
-    // Add mousemove spotlight effect
-    const spotlight = document.querySelector('.spotlight');
-    document.addEventListener('mousemove', (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      spotlight.style.left = x - 300 + 'px';
-      spotlight.style.top = y - 300 + 'px';
-    });
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
