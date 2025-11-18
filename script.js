@@ -89,55 +89,55 @@ const portfolioProjects = [
 const services = [
     {
         number: "01",
-        icon: "ðŸ“º",
+        icon: '<i class="fa-solid fa-tv"></i>',
         title: "TV Commercials (TVCs)",
         description: "High-quality broadcast commercials crafted for global and local audiences"
     },
     {
         number: "02",
-        icon: "ðŸŽ¬",
+        icon: '<i class="fa-solid fa-film"></i>',
         title: "Digital Films & Branded Content",
         description: "Engaging digital stories designed for social platforms, web campaigns, and online audiences"
     },
     {
         number: "03",
-        icon: "ðŸ“¹",
+        icon: '<i class="fa-solid fa-video"></i>',
         title: "Commercial Productions",
         description: "End-to-end creative and production services for product, lifestyle, and brand-focused commercials"
     },
     {
         number: "04",
-        icon: "ðŸŽžï¸",
+        icon: '<i class="fa-solid fa-clapperboard"></i>',
         title: "Documentary Films",
         description: "Authentic, insightful documentaries with strong storytelling and cinematic visuals"
     },
     {
         number: "05",
-        icon: "ðŸ¢",
+        icon: '<i class="fa-solid fa-building"></i>',
         title: "Corporate Profiles & Brand Films",
         description: "Professional corporate videos that highlight your company's vision, culture, and achievements"
     },
     {
         number: "06",
-        icon: "ðŸŽµ",
+        icon: '<i class="fa-solid fa-music"></i>',
         title: "Music Videos",
         description: "Conceptual, performance-driven, and narrative music videos with creative direction"
     },
     {
         number: "07",
-        icon: "ðŸŽª",
+        icon: '<i class="fa-solid fa-calendar-days"></i>',
         title: "Event Videos",
         description: "Coverage and highlight films for corporate events, brand activations, launches, and concerts"
     },
     {
         number: "08",
-        icon: "âœ¨",
+        icon: '<i class="fa-solid fa-wand-magic-sparkles"></i>',
         title: "VFX, 3D & Post-Production",
         description: "Advanced CGI, motion graphics, compositing, editing, colour grading, and sound design"
     },
     {
         number: "09",
-        icon: "ðŸŒ",
+        icon: '<i class="fa-solid fa-globe"></i>',
         title: "International Production Support",
         description: "Full foreign production solutions including crew, logistics, locations, permits, and line production for global clients shooting in Sri Lanka"
     }
