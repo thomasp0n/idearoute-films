@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo+Black&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -108,46 +107,6 @@
         <div class="services-grid" id="servicesGrid"></div>
     </section>
 
-    <!-- Partners Section -->
-    <section class="section partners-section" id="partners">
-        <div class="section-header">
-            <div class="section-label">Trusted By</div>
-            <h2 class="section-title gradient-text">Our Partners</h2>
-            <p class="section-description">Collaborating with leading brands to create exceptional visual experiences</p>
-        </div>
-        <div class="partners-carousel">
-            <div class="partners-track" id="partnersTrack1">
-                <div class="partner-logo"><img src="assets/partners/CoolPlanet1.png" alt="Cool Planet"></div>
-                <div class="partner-logo"><img src="assets/partners/Arpico1.png" alt="Arpico"></div>
-                <div class="partner-logo"><img src="assets/partners/Hemas1.png" alt="Hemas"></div>
-                <div class="partner-logo"><img src="assets/partners/Samsung1.png" alt="Samsung"></div>
-                <div class="partner-logo"><img src="assets/partners/Fems1.png" alt="Fems"></div>
-                <div class="partner-logo"><img src="assets/partners/Baurs1.png" alt="Baurs"></div>
-                <div class="partner-logo"><img src="assets/partners/Microsoft1.png" alt="Microsoft"></div>
-                <div class="partner-logo"><img src="assets/partners/BritishCosmetics1.png" alt="British Cosmetics"></div>
-                <div class="partner-logo"><img src="assets/partners/BabyCheramy1.png" alt="Baby Cheramy"></div>
-                <div class="partner-logo"><img src="assets/partners/StandardChartered1.png" alt="Standard Chartered"></div>
-                <div class="partner-logo"><img src="assets/partners/Mortein1.png" alt="Mortein"></div>
-                <div class="partner-logo"><img src="assets/partners/Dulux1.png" alt="Dulux"></div>
-            </div>
-        </div>
-        <div class="partners-carousel partners-carousel-reverse">
-            <div class="partners-track" id="partnersTrack2">
-                <div class="partner-logo"><img src="assets/partners/Libera1.png" alt="Libera"></div>
-                <div class="partner-logo"><img src="assets/partners/SurfExcel1.png" alt="Surf Excel"></div>
-                <div class="partner-logo"><img src="assets/partners/Bairaha1.png" alt="Bairaha"></div>
-                <div class="partner-logo"><img src="assets/partners/Sunlight1.png" alt="Sunlight"></div>
-                <div class="partner-logo"><img src="assets/partners/Maliban1.png" alt="Maliban"></div>
-                <div class="partner-logo"><img src="assets/partners/Martini1.png" alt="Martini"></div>
-                <div class="partner-logo"><img src="assets/partners/Softlogic1.png" alt="Softlogic"></div>
-                <div class="partner-logo"><img src="assets/partners/Thilakawardhana1.png" alt="Thilakawardhana Textiles"></div>
-                <div class="partner-logo"><img src="assets/partners/Kumarika1.png" alt="Kumarika"></div>
-                <div class="partner-logo"><img src="assets/partners/ElephantHouse1.png" alt="Elephant House"></div>
-                <div class="partner-logo"><img src="assets/partners/Sunquick1.png" alt="Sunquick"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- About Section -->
     <section class="section" id="about">
         <div class="section-header">
@@ -195,21 +154,21 @@
                 <p>Whether you're looking to create a commercial, music video, or any other visual content, we're here to help make it happen.</p>
                 <div class="contact-details">
                     <div class="contact-item">
-                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-icon">ðŸ“§</div>
                         <div class="contact-item-content">
                             <h4>Email Address</h4>
                             <p>hello@idearoutefilms.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-icon">ðŸ“ž</div>
                         <div class="contact-item-content">
                             <h4>Phone Number</h4>
                             <p>+94 76 707 2025</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="contact-icon">ðŸ“</div>
                         <div class="contact-item-content">
                             <h4>Location</h4>
                             <p>Colombo, Sri Lanka</p>
@@ -217,6 +176,30 @@
                     </div>
                 </div>
             </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" class="form-input" placeholder="Project inquiry" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">
+                    <span>Send Message</span>
+                </button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
         </div>
     </section>
 
@@ -235,6 +218,16 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">TV Commercials</a></li>
+                    <li><a href="#services">Digital Films</a></li>
+                    <li><a href="#services">Music Videos</a></li>
+                    <li><a href="#services">Documentary Films</a></li>
+                    <li><a href="#services">VFX & Post Production</a></li>
                 </ul>
             </div>
         </div>

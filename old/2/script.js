@@ -89,55 +89,55 @@ const portfolioProjects = [
 const services = [
     {
         number: "01",
-        icon: '<i class="fa-solid fa-tv"></i>',
+        icon: "📺",
         title: "TV Commercials (TVCs)",
         description: "High-quality broadcast commercials crafted for global and local audiences"
     },
     {
         number: "02",
-        icon: '<i class="fa-solid fa-film"></i>',
+        icon: "🎬",
         title: "Digital Films & Branded Content",
         description: "Engaging digital stories designed for social platforms, web campaigns, and online audiences"
     },
     {
         number: "03",
-        icon: '<i class="fa-solid fa-video"></i>',
+        icon: "📹",
         title: "Commercial Productions",
         description: "End-to-end creative and production services for product, lifestyle, and brand-focused commercials"
     },
     {
         number: "04",
-        icon: '<i class="fa-solid fa-clapperboard"></i>',
+        icon: "🎞️",
         title: "Documentary Films",
         description: "Authentic, insightful documentaries with strong storytelling and cinematic visuals"
     },
     {
         number: "05",
-        icon: '<i class="fa-solid fa-building"></i>',
+        icon: "🏢",
         title: "Corporate Profiles & Brand Films",
         description: "Professional corporate videos that highlight your company's vision, culture, and achievements"
     },
     {
         number: "06",
-        icon: '<i class="fa-solid fa-music"></i>',
+        icon: "🎵",
         title: "Music Videos",
         description: "Conceptual, performance-driven, and narrative music videos with creative direction"
     },
     {
         number: "07",
-        icon: '<i class="fa-solid fa-calendar-days"></i>',
+        icon: "🎪",
         title: "Event Videos",
         description: "Coverage and highlight films for corporate events, brand activations, launches, and concerts"
     },
     {
         number: "08",
-        icon: '<i class="fa-solid fa-wand-magic-sparkles"></i>',
+        icon: "✨",
         title: "VFX, 3D & Post-Production",
         description: "Advanced CGI, motion graphics, compositing, editing, colour grading, and sound design"
     },
     {
         number: "09",
-        icon: '<i class="fa-solid fa-globe"></i>',
+        icon: "🌍",
         title: "International Production Support",
         description: "Full foreign production solutions including crew, logistics, locations, permits, and line production for global clients shooting in Sri Lanka"
     }
@@ -233,30 +233,6 @@ services.forEach((service, index) => {
     servicesGrid.appendChild(card);
 });
 
-// Duplicate Partner Logos for Infinite Scroll
-function duplicatePartnerLogos() {
-    const track1 = document.getElementById('partnersTrack1');
-    const track2 = document.getElementById('partnersTrack2');
-    
-    if (track1 && track2) {
-        // Clone all logos in track 1
-        const logos1 = Array.from(track1.children);
-        logos1.forEach(logo => {
-            const clone = logo.cloneNode(true);
-            track1.appendChild(clone);
-        });
-        
-        // Clone all logos in track 2
-        const logos2 = Array.from(track2.children);
-        logos2.forEach(logo => {
-            const clone = logo.cloneNode(true);
-            track2.appendChild(clone);
-        });
-    }
-}
-
-duplicatePartnerLogos();
-
 // Modal Functions
 const modal = document.getElementById('videoModal');
 const modalClose = document.getElementById('modalClose');
@@ -282,6 +258,34 @@ modal.addEventListener('click', (e) => {
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
+});
+
+// Form Submission
+const contactForm = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    if (name && email && subject && message) {
+        formMessage.textContent = 'Thank you for your message! We\'ll get back to you soon.';
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+        contactForm.reset();
+    } else {
+        formMessage.textContent = 'Please fill in all fields.';
+        formMessage.className = 'form-message error';
+        formMessage.style.display = 'block';
+    }
+    
+    setTimeout(() => {
+        formMessage.style.display = 'none';
+    }, 5000);
 });
 
 // Scroll Reveal Animation
