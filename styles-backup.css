@@ -170,20 +170,6 @@ body {
 .nav-logo {
   text-decoration: none;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-}
-
-.nav-logo img {
-  height: 50px;
-  width: auto;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 8px rgba(30, 138, 139, 0.3));
-}
-
-.nav-logo:hover img {
-  transform: scale(1.05);
-  filter: drop-shadow(0 4px 12px rgba(30, 138, 139, 0.5));
 }
 
 .logo-text {
@@ -1039,12 +1025,12 @@ body {
 
 .partner-logo {
   flex-shrink: 0;
-  width: 280px;
-  height: 140px;
+  width: 200px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1.5rem;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
@@ -1079,14 +1065,13 @@ body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: grayscale(100%) brightness(0) invert(1) opacity(0.7);
+  filter: grayscale(100%) brightness(0) invert(1) opacity(0.6);
   transition: all 0.4s ease;
-  transform: scale(1.1);
 }
 
 .partner-logo:hover img {
   filter: grayscale(0%) brightness(1) invert(0) opacity(1);
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
 
 /* About Section */
@@ -1355,13 +1340,6 @@ body {
 
 .footer-logo {
   margin-bottom: 2rem;
-}
-
-.footer-brand img {
-  height: 60px;
-  width: auto;
-  margin-bottom: 2rem;
-  filter: drop-shadow(0 2px 8px rgba(30, 138, 139, 0.2));
 }
 
 .footer-logo .logo-text {
@@ -1726,8 +1704,8 @@ body {
   }
   
   .partner-logo {
-    width: 220px;
-    height: 110px;
+    width: 160px;
+    height: 80px;
   }
   
   .partners-track {
