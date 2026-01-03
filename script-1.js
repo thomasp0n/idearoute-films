@@ -18,77 +18,22 @@ createParticles();
 // Portfolio Data with correct YouTube video titles
 const portfolioProjects = [
     {
-        title: "IdeaRoute Films - Showreel",
+        title: "IdeaRoute Films - Showreel 2024",
         category: "reel",
         youtubeId: "sQk8NkhT8UU",
         thumbnail: "https://img.youtube.com/vi/sQk8NkhT8UU/maxresdefault.jpg"
     },
-    // TVC
     {
-        title: "BAIRAHA WOW B | IdeaRoute Films",
-        category: "tvc",
-        youtubeId: "RTfaKyKY_8",
-        thumbnail: "https://img.youtube.com/vi/-RTfaKyKY_8/maxresdefault.jpg"
-
-    },
-    {
-        title: "Rainco - Guru Panduru | IdeaRoute Films",
+        title: "Rainco - Guru Panduru TVC",
         category: "tvc",
         youtubeId: "8ZVcz7cMAi4",
         thumbnail: "https://img.youtube.com/vi/8ZVcz7cMAi4/maxresdefault.jpg"
     },
     {
-        title: "Arpico Super Center - Christmas | IdeaRoute Films",
+        title: "Arpico Super Center - Christmas TVC",
         category: "tvc",
         youtubeId: "nRAb_AzfN00",
         thumbnail: "https://img.youtube.com/vi/nRAb_AzfN00/hqdefault.jpg"
-    },
-    {
-        title: "DULUX SuperKote - Favorite Color | IdeaRoute Films",
-        category: "tvc",
-        youtubeId: "e3r3atWHYkk",
-        thumbnail: "https://img.youtube.com/vi/e3r3atWHYkk/maxresdefault.jpg"
-
-    },
-    {
-        title: "Aloe Relief TVC | IdeaRoute Films",
-        category: "tvc",
-        youtubeId: "yVLubOxsvFU",
-        thumbnail: "https://img.youtube.com/vi/yVLubOxsvFU/maxresdefault.jpg"
-
-    },
-        {
-        title: "Thilakawardana - Flair | IdeaRoute Films",
-        category: "tvc",
-        youtubeId: "oB80fJkuoUE",
-        thumbnail: "https://img.youtube.com/vi/oB80fJkuoUE/maxresdefault.jpg"
-
-    },
-    // music videos
-    {
-        title: "Veenavi - Iraj Ft. Ashanya, Neo & Jay Princce",
-        category: "music",
-        youtubeId: "MtAXfij4x00",
-        thumbnail: "https://img.youtube.com/vi/MtAXfij4x00/maxresdefault.jpg"
-    },
-    {
-        title: "Kolam Natannata - Nadeemal Perera",
-        category: "music",
-        youtubeId: "z-PAp-WOYcA",
-        thumbnail: "https://img.youtube.com/vi/z-PAp-WOYcA/maxresdefault.jpg"
-    },
-    {
-        title: "Hasangana - Tilan GT x Poppunk",
-        category: "music",
-        youtubeId: "ZDUMvC_WNsk",
-        thumbnail: "https://img.youtube.com/vi/ZDUMvC_WNsk/maxresdefault.jpg"
-    },
-    {
-        title: "Mandarame - Pop Punk feat. BigDoggy",
-        category: "music",
-        youtubeId: "geDLgasXNv4",
-        thumbnail: "https://img.youtube.com/vi/geDLgasXNv4/maxresdefault.jpg"
-
     },
     {
         title: "Matta Matti - Sunny Austin ft. Hirushi Jayasena",
@@ -97,13 +42,55 @@ const portfolioProjects = [
         thumbnail: "https://img.youtube.com/vi/iHitM-uVmwE/maxresdefault.jpg"
     },
     {
+        title: "DULUX SuperKote - Favorite Color TVC",
+        category: "tvc",
+        youtubeId: "e3r3atWHYkk",
+        thumbnail: "https://img.youtube.com/vi/e3r3atWHYkk/maxresdefault.jpg"
+    },
+    {
+        title: "Aloe Relief TVC | IdeaRoute Films",
+        category: "tvc",
+        youtubeId: "yVLubOxsvFU",
+        thumbnail: "https://img.youtube.com/vi/yVLubOxsvFU/maxresdefault.jpg"
+    },
+    {
+        title: "Hasangana - Tilan GT x Poppunk",
+        category: "music",
+        youtubeId: "ZDUMvC_WNsk",
+        thumbnail: "https://img.youtube.com/vi/ZDUMvC_WNsk/maxresdefault.jpg"
+    },
+    {
+        title: "Kolam Natannata - Nadeemal Perera",
+        category: "music",
+        youtubeId: "z-PAp-WOYcA",
+        thumbnail: "https://img.youtube.com/vi/z-PAp-WOYcA/maxresdefault.jpg"
+    },
+    {
+        title: "Sithuvili - Eranga UG, Chandralekha Perera & Rookantha Goonatillake",
+        category: "music",
+        youtubeId: "GlIRiOYc6lM",
+        thumbnail: "https://img.youtube.com/vi/GlIRiOYc6lM/maxresdefault.jpg"
+    },
+    {
         title: "Hadakari - Nadeemal Perera X Pasan Liyanage",
         category: "music",
         youtubeId: "DQQcqDqMhsM",
-        thumbnail: "https://img.youtube.com/vi/DQQcqDqMhsM/maxresdefault.jpg"       
+        thumbnail: "https://img.youtube.com/vi/DQQcqDqMhsM/maxresdefault.jpg"
     },
     {
-        title: "Trip - Nipuna Fernando x Costa",
+        title: "Pop Punk - Mandarame [feat. BigDoggy]",
+        category: "music",
+        youtubeId: "geDLgasXNv4",
+        thumbnail: "https://img.youtube.com/vi/geDLgasXNv4/maxresdefault.jpg"
+    },
+    {
+        title: "Veenavi - Iraj Ft. Ashanya, Neo & Jay Princce",
+        category: "music",
+        youtubeId: "MtAXfij4x00",
+        thumbnail: "https://img.youtube.com/vi/MtAXfij4x00/maxresdefault.jpg"
+    },
+    {
+        title: "Nipuna Fernando x Costa - Trip",
         category: "music",
         youtubeId: "HfDPzA0V2xw",
         thumbnail: "https://img.youtube.com/vi/HfDPzA0V2xw/maxresdefault.jpg"
@@ -121,10 +108,10 @@ const portfolioProjects = [
         thumbnail: "https://img.youtube.com/vi/I313PpwgWvs/maxresdefault.jpg"
     },
     {
-        title: "Kasi Panam - Big Doggy x Pop Punk",
+        title: "Amal Perera - Mareeza",
         category: "music",
-        youtubeId: "8qXFdrzgBMU",
-        thumbnail: "https://img.youtube.com/vi/8qXFdrzgBMU/maxresdefault.jpg"
+        youtubeId: "8dH0kNOP4UY",
+        thumbnail: "https://img.youtube.com/vi/8dH0kNOP4UY/maxresdefault.jpg"
     },
     {
         title: "Sihine Mayawi - A Ryan",
@@ -133,42 +120,47 @@ const portfolioProjects = [
         thumbnail: "https://img.youtube.com/vi/Q3Egm57k8fk/maxresdefault.jpg"
     },
     {
-        title: "Samsara - Pop Punk feat. Shadhir Ahamed [Aco Electro Mode]",
-        category: "music",
-        youtubeId: "iDz0zmlCgx4",
-        thumbnail: "https://img.youtube.com/vi/iDz0zmlCgx4/maxresdefault.jpg"
-    },
-    {
-        title: "Mareeza - Amal Perera",
-        category: "music",
-        youtubeId: "8dH0kNOP4UY",
-        thumbnail: "https://img.youtube.com/vi/8dH0kNOP4UY/maxresdefault.jpg" 
-    },
-    {
-        title: "Sithuvili - Eranga UG, Chandralekha Perera & Rookantha Goonatillake",
-        category: "music",
-        youtubeId: "GlIRiOYc6lM",
-        thumbnail: "https://img.youtube.com/vi/GlIRiOYc6lM/maxresdefault.jpg"
-    },
-    {
         title: "Oya Nisane - Dimi3",
         category: "music",
         youtubeId: "rlwzjp7yv8M",
         thumbnail: "https://img.youtube.com/vi/rlwzjp7yv8M/maxresdefault.jpg"
     },
-
-    // corporate videos
+    {
+        title: "Kasi Panam - Big Doggy x Pop Punk",
+        category: "music",
+        youtubeId: "8qXFdrzgBMU",
+        thumbnail: "https://img.youtube.com/vi/8qXFdrzgBMU/maxresdefault.jpg"
+    },
+    {
+        title: "Pop Punk - Samsara (feat. Shadhir Ahamed) [Aco Electro Mode]",
+        category: "music",
+        youtubeId: "iDz0zmlCgx4",
+        thumbnail: "https://img.youtube.com/vi/iDz0zmlCgx4/maxresdefault.jpg"
+    },
+    {
+        title: "Pop Punk - Nonidana Ra [feat. Freaky Mobbig]",
+        category: "music",
+        youtubeId: "ZQhs5AK-xsY",
+        thumbnail: "https://img.youtube.com/vi/ZQhs5AK-xsY/maxresdefault.jpg"
+    },
+    {
+        title: "Dimi3 x Shakila Dilshan - Heena Thoranna",
+        category: "music",
+        youtubeId: "1P1D0j3RATI",
+        thumbnail: "https://img.youtube.com/vi/1P1D0j3RATI/maxresdefault.jpg"
+    },
+    // Add some corporate videos (placeholder examples - replace with your actual videos)
     {
         title: "It's Martini Time | IdeaRoute Films",
         category: "corporate",
-        youtubeId: "m_JhIERspQI",
+        youtubeId: "m_JhIERspQI", // Replace with actual corporate video ID
         thumbnail: "https://img.youtube.com/vi/m_JhIERspQI/maxresdefault.jpg"
     },
-      {
-        title: "SENEHASA Foundation Documentary | IdeaRoute Films",
+    {
+        title: "It's Martini Time | IdeaRoute Films",
         category: "corporate",
-        youtubeId: "xGjE5pkanJk",
-        thumbnail: "https://img.youtube.com/vi/xGjE5pkanJk/maxresdefault.jpg"
+        youtubeId: "m_JhIERspQI", // Replace with actual corporate video ID
+        thumbnail: "https://img.youtube.com/vi/m_JhIERspQI/maxresdefault.jpg"
     }
 ];
 
