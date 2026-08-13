@@ -33,19 +33,32 @@
   .topbar .title{ color:var(--paper); }
   .topbar .viewer-id{ color:var(--accent); }
 
-  .stage{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; padding:20px; overflow:hidden; }
+  .stage{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; padding:20px; overflow:auto; }
   .page-frame{
-    position:relative; width:min(720px, 92vw); height:min(82vh, 930px);
+    position:relative; width:min(1100px, 92vw); aspect-ratio:16/9; max-width:100%;
     background-color:#fff; background-repeat:no-repeat; background-position:center;
     background-size:contain; border-radius:4px; box-shadow:0 30px 80px rgba(0,0,0,0.55);
+    transition: width 0.18s ease; flex-shrink:0;
   }
   .page-frame .capture-layer{ position:absolute; inset:0; z-index:5; }
 
-  .nav{ display:flex; align-items:center; justify-content:center; gap:22px; padding:16px 0 26px; z-index:10; }
+  .nav{ display:flex; align-items:center; justify-content:center; gap:18px; padding:16px 12px 26px; z-index:10; flex-wrap:wrap; }
   .nav button{ background:transparent; border:1px solid var(--line); color:var(--paper); width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:16px; }
   .nav button:hover{ border-color:var(--accent); color:var(--accent); }
   .nav .counter{ font-size:12px; letter-spacing:0.08em; color:var(--paper-dim); min-width:70px; text-align:center; }
-  .nav input.pageJump{ width:50px; padding:6px; text-align:center; background:#17181c; border:1px solid #444; color:var(--paper); border-radius:4px; -webkit-user-select:text; user-select:text; }
+  .nav .divider{ width:1px; height:22px; background:var(--line); }
+  .nav .zoom-controls{ display:flex; align-items:center; gap:10px; }
+  .nav .zoom-controls button{ width:34px; height:34px; font-size:15px; }
+  .nav .zoomLevel{ font-size:11px; letter-spacing:0.06em; color:var(--paper-dim); min-width:42px; text-align:center; }
+
+  @media (max-width: 640px){
+    .topbar{ padding:10px 14px; font-size:10px; flex-wrap:wrap; gap:4px; }
+    .stage{ padding:10px; }
+    .page-frame{ width:96vw; }
+    .nav{ gap:10px; padding:12px 8px 20px; }
+    .nav button{ width:36px; height:36px; font-size:14px; }
+    .nav .counter{ min-width:54px; font-size:11px; }
+  }
 
   #watermark{ position:fixed; inset:0; pointer-events:none; z-index:30; overflow:hidden; }
   #watermark .row{ display:flex; white-space:nowrap; transform:rotate(-28deg) scale(1.4); opacity:0.1; font-size:12px;
@@ -86,9 +99,16 @@
     <div class="page-frame" id="pageFrame"><div class="capture-layer"></div></div>
   </div>
   <div class="nav">
-    <button onclick="prevPage()" aria-label="Previous">&#8592;</button>
+    <button onclick="prevPage()" aria-label="Previous page">&#8592;</button>
     <span class="counter" id="counter">1 / 1</span>
-    <button onclick="nextPage()" aria-label="Next">&#8594;</button>
+    <button onclick="nextPage()" aria-label="Next page">&#8594;</button>
+    <div class="divider"></div>
+    <div class="zoom-controls">
+      <button onclick="zoomOut()" aria-label="Zoom out">&#8722;</button>
+      <span class="zoomLevel" id="zoomLevel">100%</span>
+      <button onclick="zoomIn()" aria-label="Zoom in">&#43;</button>
+      <button onclick="zoomReset()" aria-label="Reset zoom" style="width:auto;border-radius:6px;font-size:11px;padding:0 10px;">Reset</button>
+    </div>
   </div>
 </div>
 
@@ -157,6 +177,7 @@ async function unlock(){
   document.getElementById('viewerIdLabel').textContent = record.name + ' · ' + record.email;
   await buildWatermark();
   attachProtections();
+  applyZoom();
   renderPage(1);
 }
 
@@ -196,6 +217,45 @@ function renderPage(num){
 function nextPage(){ if(currentPage < TOTAL_PAGES){ currentPage++; renderPage(currentPage); } }
 function prevPage(){ if(currentPage > 1){ currentPage--; renderPage(currentPage); } }
 
+/* ---------- Responsive sizing + zoom ---------- */
+// Base width is the "100% zoom" size: fills most of a laptop screen at true
+// 16:9 with no cropping, and most of the screen width on mobile for readability.
+let zoom = 1;
+const ZOOM_MIN = 0.6, ZOOM_MAX = 2.5, ZOOM_STEP = 0.2;
+
+function isMobileWidth(){ return window.innerWidth <= 640; }
+
+function baseWidthPx(){
+  const vw = window.innerWidth;
+  const cap = isMobileWidth() ? vw * 0.96 : Math.min(vw * 0.92, 1100);
+  return cap;
+}
+
+function applyZoom(){
+  const width = baseWidthPx() * zoom;
+  pageFrame.style.width = width + 'px';
+  document.getElementById('zoomLevel').textContent = Math.round(zoom * 100) + '%';
+}
+
+function zoomIn(){ zoom = Math.min(ZOOM_MAX, +(zoom + ZOOM_STEP).toFixed(2)); applyZoom(); }
+function zoomOut(){ zoom = Math.max(ZOOM_MIN, +(zoom - ZOOM_STEP).toFixed(2)); applyZoom(); }
+function zoomReset(){ zoom = 1; applyZoom(); }
+
+// Ctrl/Cmd + scroll wheel to zoom, like a native document viewer
+document.addEventListener('wheel', function(e){
+  if(!viewer.style.display || viewer.style.display === 'none') return;
+  if(e.ctrlKey || e.metaKey){
+    e.preventDefault();
+    if(e.deltaY < 0) zoomIn(); else zoomOut();
+  }
+}, { passive:false });
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(applyZoom, 120);
+});
+
 /* ---------- Protections ---------- */
 function attachProtections(){
   document.addEventListener('contextmenu', e => e.preventDefault());
@@ -207,6 +267,9 @@ function attachProtections(){
     const k = e.key ? e.key.toLowerCase() : '';
     if(k === 'arrowright') nextPage();
     if(k === 'arrowleft') prevPage();
+    if(k === '+' || k === '=') zoomIn();
+    if(k === '-' || k === '_') zoomOut();
+    if(k === '0') zoomReset();
     const blockedCombo = (e.ctrlKey || e.metaKey) && ['s','p','c','u'].includes(k);
     const devtoolsKey = k === 'f12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(k));
     if(blockedCombo || devtoolsKey) e.preventDefault();
