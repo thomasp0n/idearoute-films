@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<title>HARDY BOYS — Script Access | IdeaRoute Films</title>
+<title>HARDY BOYS — Film Pitch Deck Access | © 2026 IdeaRoute Films</title>
 <style>
   :root{
     --ink:#0c0d10; --paper:#efe9df; --paper-dim:#c9c2b4; --accent:#b1451c;
@@ -42,6 +42,18 @@
   }
   .page-frame .capture-layer{ position:absolute; inset:0; z-index:5; }
 
+  .side-nav{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:20;
+    width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(12,13,16,0.55); border:1px solid var(--line); color:var(--paper);
+    font-size:26px; cursor:pointer; backdrop-filter:blur(4px); transition:all 0.15s ease;
+  }
+  .side-nav:hover{ border-color:var(--accent); color:var(--accent); background:rgba(12,13,16,0.8); }
+  .side-nav:disabled{ opacity:0.25; cursor:default; }
+  .side-nav:disabled:hover{ border-color:var(--line); color:var(--paper); background:rgba(12,13,16,0.55); }
+  .side-nav.left{ left:16px; }
+  .side-nav.right{ right:16px; }
+
   .nav{ display:flex; align-items:center; justify-content:center; gap:18px; padding:16px 12px 26px; z-index:10; flex-wrap:wrap; }
   .nav button{ background:transparent; border:1px solid var(--line); color:var(--paper); width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:16px; }
   .nav button:hover{ border-color:var(--accent); color:var(--accent); }
@@ -50,11 +62,18 @@
   .nav .zoom-controls{ display:flex; align-items:center; gap:10px; }
   .nav .zoom-controls button{ width:34px; height:34px; font-size:15px; }
   .nav .zoomLevel{ font-size:11px; letter-spacing:0.06em; color:var(--paper-dim); min-width:42px; text-align:center; }
+  .nav .jump-controls{ display:flex; align-items:center; gap:8px; }
+  .nav input.pageJump{ width:56px; padding:8px 6px; text-align:center; background:#17181c; border:1px solid #444; color:var(--paper);
+    border-radius:6px; font-size:12px; -webkit-user-select:text; user-select:text; -moz-appearance:textfield; }
+  .nav input.pageJump::-webkit-outer-spin-button, .nav input.pageJump::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .nav .jump-controls button{ width:auto; border-radius:6px; font-size:11px; padding:0 12px; }
 
   @media (max-width: 640px){
     .topbar{ padding:10px 14px; font-size:10px; flex-wrap:wrap; gap:4px; }
     .stage{ padding:10px; }
     .page-frame{ width:96vw; }
+    .side-nav{ width:44px; height:44px; font-size:18px; }
+    .side-nav.left{ left:6px; } .side-nav.right{ right:6px; }
     .nav{ gap:10px; padding:12px 8px 20px; }
     .nav button{ width:36px; height:36px; font-size:14px; }
     .nav .counter{ min-width:54px; font-size:11px; }
@@ -79,7 +98,7 @@
 <div id="gate">
   <div class="reel"></div>
   <h1>HARDY BOYS</h1>
-  <div class="sub">Script Access — IdeaRoute Films — For Consideration Only</div>
+  <div class="sub">Film Pitch Deck Access | © 2026 IdeaRoute Films | For Consideration Only</div>
   <input type="password" id="pwInput" placeholder="Enter your access code" autocomplete="off">
   <br>
   <button onclick="checkPassword()">Enter</button>
@@ -92,22 +111,26 @@
 
 <div id="viewer">
   <div class="topbar">
-    <span class="title">HARDY BOYS <span style="color:var(--paper-dim)">/// Screenplay</span></span>
+    <span class="title">HARDY BOYS <span style="color:var(--paper-dim)">/// Film Pitch Deck</span></span>
     <span class="viewer-id" id="viewerIdLabel"></span>
   </div>
   <div class="stage">
+    <button class="side-nav left" id="sideLeft" onclick="prevPage()" aria-label="Previous page">&#8592;</button>
     <div class="page-frame" id="pageFrame"><div class="capture-layer"></div></div>
+    <button class="side-nav right" id="sideRight" onclick="nextPage()" aria-label="Next page">&#8594;</button>
   </div>
   <div class="nav">
-    <button onclick="prevPage()" aria-label="Previous page">&#8592;</button>
+    <div class="jump-controls">
+      <input type="number" id="pageJumpInput" class="pageJump" min="1" placeholder="Pg">
+      <button onclick="jumpToPage()">Go</button>
+    </div>
     <span class="counter" id="counter">1 / 1</span>
-    <button onclick="nextPage()" aria-label="Next page">&#8594;</button>
     <div class="divider"></div>
     <div class="zoom-controls">
       <button onclick="zoomOut()" aria-label="Zoom out">&#8722;</button>
       <span class="zoomLevel" id="zoomLevel">100%</span>
       <button onclick="zoomIn()" aria-label="Zoom in">&#43;</button>
-      <button onclick="zoomReset()" aria-label="Reset zoom" style="width:auto;border-radius:6px;font-size:11px;padding:0 10px;">Reset</button>
+      <button onclick="zoomReset()" style="width:auto;border-radius:6px;font-size:11px;padding:0 10px;">Reset</button>
     </div>
   </div>
 </div>
@@ -138,7 +161,7 @@ const PRODUCERS = {
   },
   "demo": {
     name: "Demo Reader",
-    email: "demo@example.com",
+    email: "demo@idearoutefilms.com",
     passwordHash: "0ead2060b65992dca4769af601a1b3a35ef38cfad2c2c465bb160ea764157c5d" // password: demo1234
   }
 };
@@ -178,6 +201,7 @@ async function unlock(){
   await buildWatermark();
   attachProtections();
   applyZoom();
+  currentPage = 1;
   renderPage(1);
 }
 
@@ -209,13 +233,30 @@ async function buildWatermark(){
 let currentPage = 1;
 const pageFrame = document.getElementById('pageFrame');
 const counter = document.getElementById('counter');
+const sideLeft = document.getElementById('sideLeft');
+const sideRight = document.getElementById('sideRight');
 
 function renderPage(num){
   pageFrame.style.backgroundImage = `url("${pagePath(num)}")`;
   counter.textContent = num + ' / ' + TOTAL_PAGES;
+  sideLeft.disabled = (num <= 1);
+  sideRight.disabled = (num >= TOTAL_PAGES);
 }
 function nextPage(){ if(currentPage < TOTAL_PAGES){ currentPage++; renderPage(currentPage); } }
 function prevPage(){ if(currentPage > 1){ currentPage--; renderPage(currentPage); } }
+
+function jumpToPage(){
+  const input = document.getElementById('pageJumpInput');
+  let target = parseInt(input.value, 10);
+  if(isNaN(target)) return;
+  target = Math.max(1, Math.min(TOTAL_PAGES, target));
+  currentPage = target;
+  renderPage(currentPage);
+  input.value = '';
+}
+document.getElementById('pageJumpInput')?.addEventListener('keydown', e => {
+  if(e.key === 'Enter') jumpToPage();
+});
 
 /* ---------- Responsive sizing + zoom ---------- */
 // Base width is the "100% zoom" size: fills most of a laptop screen at true
@@ -241,14 +282,42 @@ function zoomIn(){ zoom = Math.min(ZOOM_MAX, +(zoom + ZOOM_STEP).toFixed(2)); ap
 function zoomOut(){ zoom = Math.max(ZOOM_MIN, +(zoom - ZOOM_STEP).toFixed(2)); applyZoom(); }
 function zoomReset(){ zoom = 1; applyZoom(); }
 
-// Ctrl/Cmd + scroll wheel to zoom, like a native document viewer
+// Ctrl/Cmd + scroll wheel to zoom, like a native document viewer.
+// Plain scroll (no modifier) turns pages instead, but only while at
+// 100% zoom — once zoomed in, plain scroll pans the enlarged image normally.
+let lastWheelTurn = 0;
 document.addEventListener('wheel', function(e){
   if(!viewer.style.display || viewer.style.display === 'none') return;
   if(e.ctrlKey || e.metaKey){
     e.preventDefault();
     if(e.deltaY < 0) zoomIn(); else zoomOut();
+    return;
+  }
+  if(zoom <= 1){
+    const now = Date.now();
+    if(now - lastWheelTurn < 450) return; // debounce trackpads/fast wheels
+    if(Math.abs(e.deltaY) < 25) return;
+    lastWheelTurn = now;
+    if(e.deltaY > 0) nextPage(); else prevPage();
   }
 }, { passive:false });
+
+// Touch swipe navigation (mobile) — swipe left for next page, right for previous.
+let touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', function(e){
+  if(!viewer.style.display || viewer.style.display === 'none') return;
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive:true });
+
+document.addEventListener('touchend', function(e){
+  if(!viewer.style.display || viewer.style.display === 'none') return;
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5){
+    if(dx < 0) nextPage(); else prevPage();
+  }
+}, { passive:true });
 
 let resizeTimer;
 window.addEventListener('resize', () => {
