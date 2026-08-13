@@ -98,13 +98,12 @@
    ===================================================================== */
 
 // 1. Total number of pages (must match how many page images you uploaded).
-const TOTAL_PAGES = 17; // change to your real page count, e.g. 118
+const TOTAL_PAGES = 17;
 
-// 2. Filename pattern for your converted pages, uploaded in a "pages/" folder
-//    next to this HTML file. Must match pdftoppm's zero-padded output
-//    (page-001.jpg, page-002.jpg, ...).
+// 2. Filename pattern for your converted pages, uploaded in an "images/" folder
+//    next to this HTML file. Matches: page_01.png, page_02.png ... page_17.png
 function pagePath(n){
-  return "pages/page-" + String(n).padStart(3, "0") + ".jpg";
+  return "images/page_" + String(n).padStart(2, "0") + ".png";
 }
 
 // 3. Per-producer credentials — same system as before.
