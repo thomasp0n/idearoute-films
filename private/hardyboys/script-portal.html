@@ -67,11 +67,8 @@
   <div class="reel"></div>
   <h1>HARDY BOYS</h1>
   <div class="sub">Script Access — IdeaRoute Films — For Consideration Only</div>
-  <input type="password" id="pwInput" placeholder="Enter your access code" autocomplete="off">
-  <br>
-  <button onclick="checkPassword()">Enter</button>
-  <div class="err" id="pwError"></div>
-  <div class="hint">This link and access code are issued to a single recipient.<br>Access is logged, IP-stamped, and every page is individually watermarked.<br>Do not forward this link or code.</div>
+  <!-- Auth UI left in place for later, currently disabled for preview mode -->
+  <div class="hint">Preview mode enabled — authentication temporarily disabled.</div>
 </div>
 
 <div id="watermark"></div>
@@ -120,49 +117,11 @@ const PRODUCERS = {
 // Use a locally-hosted worker for better privacy/control. Place pdf.worker.min.js in the same folder as this HTML.
 pdfjsLib.GlobalWorkerOptions.workerSrc = './pdf.worker.min.js';
 
-const params = new URLSearchParams(window.location.search);
-const id = (params.get('id') || '').trim();
-const record = PRODUCERS[id];
-
-const gate = document.getElementById('gate');
-const pwError = document.getElementById('pwError');
-const viewer = document.getElementById('viewer');
-
-if(!record){
-  gate.innerHTML = '<div style="color:#b1451c;max-width:360px;font-size:14px;line-height:1.7;">This link is not recognized.<br>Please request a valid personalized link from IdeaRoute Films.</div>';
-} else {
-  document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key === 'Enter') checkPassword(); });
-}
-
-async function sha256(text){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
+// For preview mode we skip the per-producer id/password gate and open the viewer directly.
+// This is temporary — restore the auth checks before production/real distribution.
 
 let watermarkText = 'CONFIDENTIAL';
 
-async function checkPassword(){
-  const val = document.getElementById('pwInput').value;
-  const hash = await sha256(val);
-  if(record && hash === record.passwordHash){
-    unlock();
-  } else {
-    pwError.textContent = "Incorrect access code.";
-  }
-}
-
-async function unlock(){
-  gate.style.display = 'none';
-  viewer.style.display = 'flex';
-  if(record) document.getElementById('viewerIdLabel').textContent = record.name + ' · ' + record.email;
-  await buildWatermark();
-  attachProtections();
-  // clear password from the input
-  const inp = document.getElementById('pwInput'); inp.value = ''; inp.blur();
-  loadPdf();
-}
-
-/* ---------- Watermark: viewer identity + IP + session timestamp (burned into canvases) ---------- */
 async function buildWatermark(){
   let ip = 'IP unavailable';
   try{
@@ -173,20 +132,17 @@ async function buildWatermark(){
     }
   }catch(e){ /* offline or blocked — watermark still shows name/email/time */ }
 
-  watermarkText = (record ? (record.name + '  ·  ' + record.email + '  ·  ') : '') + 'IP ' + ip + '  ·  ' + new Date().toISOString().slice(0,16).replace('T',' ') + '  ·  CONFIDENTIAL';
+  watermarkText = 'Preview User · Preview@example.com   ·  IP ' + ip + '  ·  ' + new Date().toISOString().slice(0,16).replace('T',' ') + '  ·  CONFIDENTIAL';
 }
 
-/* Paint watermark directly onto the canvas so it becomes part of the pixels */
 function burnWatermark(ctx, canvas, text){
   try{
     const w = canvas.width, h = canvas.height;
     ctx.save();
     ctx.globalAlpha = 0.12;
     ctx.fillStyle = '#b1451c';
-    // rotate around center
     ctx.translate(w/2, h/2);
     ctx.rotate(-0.45);
-    // choose font size relative to width
     const fontSize = Math.max(12, Math.floor(w / 28));
     ctx.font = `${fontSize}px serif`;
     ctx.textAlign = 'center';
@@ -199,9 +155,7 @@ function burnWatermark(ctx, canvas, text){
       }
     }
     ctx.restore();
-  }catch(e){
-    console.warn('burnWatermark failed', e);
-  }
+  }catch(e){ console.warn('burnWatermark failed', e); }
 }
 
 /* ---------- PDF.js canvas rendering (no selectable text layer) ---------- */
@@ -230,15 +184,11 @@ async function renderPage(num){
     const viewport = page.getViewport({ scale });
     canvas.width = viewport.width;
     canvas.height = viewport.height;
-    // render and wait for it to finish
     const renderTask = page.render({ canvasContext: ctx, viewport: viewport });
     await renderTask.promise;
-    // burn watermark into the canvas pixels
     burnWatermark(ctx, canvas, watermarkText);
     counter.textContent = num + ' / ' + totalPages;
-  }catch(e){
-    console.error('renderPage error', e);
-  }
+  }catch(e){ console.error('renderPage error', e); }
 }
 
 function nextPage(){ if(currentPage < totalPages){ currentPage++; renderPage(currentPage); } }
@@ -283,6 +233,16 @@ function attachProtections(){
     document.getElementById('shield').style.display = 'none';
   }
 }
+
+// Auto-open viewer for preview mode (no auth). Restore auth checks before public distribution.
+(async function previewOpen(){
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('viewer').style.display = 'flex';
+  document.getElementById('viewerIdLabel').textContent = 'Preview Mode — No Authentication';
+  await buildWatermark();
+  attachProtections();
+  loadPdf();
+})();
 </script>
 </body>
 </html>
