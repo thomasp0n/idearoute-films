@@ -115,16 +115,6 @@
   <div class="topbar">
     <span class="title"><img src="images/logo.png" alt="IdeaRoute Films" class="logo"> <span style="color:var(--paper-dim)">/// Film Pitch Deck</span></span>
     <span class="viewer-id" id="viewerIdLabel"></span>
-	<div class="topbar">
-  <span class="title"><img src="images/logo.png" alt="IdeaRoute Films" class="logo"> <span style="color:var(--paper-dim)">/// Film Pitch Deck</span></span>
-  
-  <div style="display:flex; align-items:center; gap:16px;">
-    <!-- Sound Toggle Button -->
-    <button id="audioBtn" onclick="toggleAudio()" style="background:transparent; border:1px solid var(--line); color:var(--paper-dim); border-radius:4px; padding:4px 10px; cursor:pointer; font-size:11px; font-family:var(--mono); text-transform:uppercase;">🔊 Sound: ON</button>
-    
-    <span class="viewer-id" id="viewerIdLabel"></span>
-  </div>
-</div>
   </div>
   <div class="stage">
     <button class="side-nav left" id="sideLeft" onclick="prevPage()" aria-label="Previous page">&#8592;</button>
@@ -378,51 +368,6 @@ function attachProtections(){
     document.body.classList.remove('blurred');
     document.getElementById('shield').style.display = 'none';
   }
-}
-<!-- Looping Background Audio Bed -->
-<audio id="bgAudio" src="audio/ost.mp3" loop preload="auto"></audio>
-/* ---------- Audio Bed Controls (ost.mp3) ---------- */
-const bgAudio = document.getElementById('bgAudio');
-const audioBtn = document.getElementById('audioBtn');
-
-function startAudio() {
-  if (bgAudio) {
-    bgAudio.volume = 0.25; // Subtle ambient volume (25%)
-    bgAudio.play().catch(err => {
-      console.log("Audio play prevented or file missing:", err);
-    });
-  }
-}
-
-function toggleAudio() {
-  if (!bgAudio) return;
-  if (bgAudio.paused) {
-    bgAudio.play();
-    audioBtn.textContent = "🔊 Sound: ON";
-    audioBtn.style.color = "var(--paper-dim)";
-    audioBtn.style.borderColor = "var(--line)";
-  } else {
-    bgAudio.pause();
-    audioBtn.textContent = "🔇 Sound: OFF";
-    audioBtn.style.color = "var(--accent)";
-    audioBtn.style.borderColor = "var(--accent)";
-  }
-}
-
-/* ---------- Updated unlock() function ---------- */
-async function unlock(){
-  gate.style.display = 'none';
-  viewer.style.display = 'flex';
-  document.getElementById('viewerIdLabel').textContent = record.name + ' · ' + record.email;
-  
-  // Triggers ost.mp3 looping audio on unlock
-  startAudio();
-
-  await buildWatermark();
-  attachProtections();
-  applyZoom();
-  currentPage = 1;
-  renderPage(1);
 }
 </script>
 </body>
