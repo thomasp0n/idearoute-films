@@ -11,7 +11,10 @@
     --line: rgba(239,233,223,0.14); --mono:'Courier Prime','Courier New',monospace; --serif:Georgia,'Times New Roman',serif;
   }
   *{box-sizing:border-box;}
-  html,body{ margin:0; padding:0; background:var(--ink); color:var(--paper); font-family:var(--mono); min-height:100vh;
+  html,body{ margin:0; padding:0; color:var(--paper); font-family:var(--mono); min-height:100vh;
+    background-color:var(--ink);
+    background-image: linear-gradient(rgba(12,13,16,0.88), rgba(12,13,16,0.88)), url("images/bg.png");
+    background-size: cover; background-position: center; background-repeat: no-repeat;
     -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
 
   #gate{ min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px; text-align:center; }
