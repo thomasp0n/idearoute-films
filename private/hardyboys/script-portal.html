@@ -5,7 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <title>HARDY BOYS — Script Access | IdeaRoute Films</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<!--
+  NOTE: For best privacy and reliability, host PDF.js files locally in the same folder as this HTML.
+  Download the following from a pinned PDF.js release and place them here:
+    - pdf.min.js
+    - pdf.worker.min.js
+  If you prefer to use the CDN, change the <script> src below back to the CDN URL and set
+  pdfjsLib.GlobalWorkerOptions.workerSrc accordingly.
+-->
+<script src="./pdf.min.js"></script>
 <style>
   :root{
     --ink:#0c0d10; --paper:#efe9df; --paper-dim:#c9c2b4; --accent:#b1451c;
@@ -94,30 +102,23 @@
 //    same unlisted folder (never link this folder from your site nav).
 const PDF_PATH = "hardyboys-script.pdf";
 
-// 2. Per-producer credentials. Each producer gets a URL like:
-//      yoursite.com/private/hardyboys/script-portal.html?id=janedoe
-//    ...and is given their OWN password separately (phone/email — not in the URL).
-//    To add someone: pick an id, pick a password, then in the browser console run:
+// 2. Per-producer credentials. Add entries here for each recipient.
+//    SECURITY: DO NOT store plaintext passwords here. Store only SHA-256 hex of each password.
+//    Example format (add one line per recipient):
+//      "janedoe": { name: "Jane Doe", email: "jane@xyzstudios.com", passwordHash: "<SHA256_HEX>" }
+//    Compute a SHA-256 hex in a browser console like:
 //      crypto.subtle.digest('SHA-256', new TextEncoder().encode('theirpassword'))
 //        .then(b => console.log(Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')))
-//    and paste the result as passwordHash below.
-//    Example entries below use password "temp1234" for id=janedoe (CHANGE THIS).
+//    After adding real entries, remove any demo/test accounts before distributing links.
 const PRODUCERS = {
-  "janedoe": {
-    name: "Jane Doe",
-    email: "jane@xyzstudios.com",
-    passwordHash: "3c8dde16bdd3393084188d810314df748ea69510396cc3d99e16c7688cd452d4"
-  },
-  "demo": {
-    name: "Demo Reader",
-    email: "demo@example.com",
-    passwordHash: "0ead2060b65992dca4769af601a1b3a35ef38cfad2c2c465bb160ea764157c5d"
-  }
+  // Add your recipients here. Example:
+  // "janedoe": { name: "Jane Doe", email: "jane@xyzstudios.com", passwordHash: "<SHA256_HEX>" }
 };
 
 /* ===================================================================== */
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+// Use a locally-hosted worker for better privacy/control. Place pdf.worker.min.js in the same folder as this HTML.
+pdfjsLib.GlobalWorkerOptions.workerSrc = './pdf.worker.min.js';
 
 const params = new URLSearchParams(window.location.search);
 const id = (params.get('id') || '').trim();
@@ -143,7 +144,7 @@ let watermarkText = 'CONFIDENTIAL';
 async function checkPassword(){
   const val = document.getElementById('pwInput').value;
   const hash = await sha256(val);
-  if(hash === record.passwordHash){
+  if(record && hash === record.passwordHash){
     unlock();
   } else {
     pwError.textContent = "Incorrect access code.";
@@ -153,7 +154,7 @@ async function checkPassword(){
 async function unlock(){
   gate.style.display = 'none';
   viewer.style.display = 'flex';
-  document.getElementById('viewerIdLabel').textContent = record.name + ' · ' + record.email;
+  if(record) document.getElementById('viewerIdLabel').textContent = record.name + ' · ' + record.email;
   await buildWatermark();
   attachProtections();
   // clear password from the input
@@ -172,7 +173,7 @@ async function buildWatermark(){
     }
   }catch(e){ /* offline or blocked — watermark still shows name/email/time */ }
 
-  watermarkText = record.name + '  ·  ' + record.email + '  ·  IP ' + ip + '  ·  ' + new Date().toISOString().slice(0,16).replace('T',' ') + '  ·  CONFIDENTIAL';
+  watermarkText = (record ? (record.name + '  ·  ' + record.email + '  ·  ') : '') + 'IP ' + ip + '  ·  ' + new Date().toISOString().slice(0,16).replace('T',' ') + '  ·  CONFIDENTIAL';
 }
 
 /* Paint watermark directly onto the canvas so it becomes part of the pixels */
