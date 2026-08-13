@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>HARDY BOYS — Film Pitch Deck Access | © 2026 IdeaRoute Films</title>
+<style>
+  :root{
+    --ink:#0c0d10; --paper:#efe9df; --paper-dim:#c9c2b4; --accent:#b1451c;
+    --line: rgba(239,233,223,0.14); --mono:'Courier Prime','Courier New',monospace; --serif:Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{ margin:0; padding:0; color:var(--paper); font-family:var(--mono); min-height:100vh;
+    background-color:var(--ink);
+    background-image: linear-gradient(rgba(12,13,16,0.88), rgba(12,13,16,0.88)), url("images/bg.png");
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+
+  #gate{ min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px; text-align:center; }
+  #gate .logo{ max-width:330px; max-height:330px; width:auto; height:auto; margin-bottom:10px; }
+  #gate h1{ font-family:var(--serif); font-weight:400; letter-spacing:0.04em; font-size:clamp(26px,5vw,40px); margin:0 0 6px; }
+  #gate .sub{ color:var(--paper-dim); font-size:13px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:32px; }
+  #gate input{ width:260px; padding:12px 14px; border-radius:6px; border:1px solid #444; background:#17181c; color:var(--paper);
+    font-size:14px; text-align:center; letter-spacing:0.08em; -webkit-user-select:text; user-select:text; }
+  #gate button{ margin-top:14px; padding:12px 26px; background:var(--accent); color:#fff; border:none; border-radius:6px;
+    font-size:13px; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; }
+  #gate .err{ color:var(--accent); font-size:12px; margin-top:14px; min-height:16px; }
+  #gate .hint{ color:var(--paper-dim); font-size:12px; margin-top:30px; max-width:360px; line-height:1.7; }
+
+  #viewer{ display:none; min-height:100vh; flex-direction:column; }
+  .topbar{ display:flex; justify-content:space-between; align-items:center; padding:14px 28px; background:rgba(12,13,16,0.95);
+    border-bottom:1px solid var(--line); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--paper-dim); z-index:40; }
+  .topbar .title{ color:var(--paper); display:flex; align-items:center; gap:10px; }
+  .topbar .logo{ height:22px; width:auto; display:block; }
+  .topbar .viewer-id{ color:var(--accent); }
+
+  .stage{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; padding:20px; overflow:auto; }
+  .page-frame{
+    position:relative; width:min(1100px, 92vw); aspect-ratio:16/9; max-width:100%;
+    background-color:#fff; background-repeat:no-repeat; background-position:center;
+    background-size:contain; border-radius:4px; box-shadow:0 30px 80px rgba(0,0,0,0.55);
+    transition: width 0.18s ease; flex-shrink:0;
+  }
+  .page-frame .capture-layer{ position:absolute; inset:0; z-index:5; }
+
+  .side-nav{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:20;
+    width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(12,13,16,0.55); border:1px solid var(--line); color:var(--paper);
+    font-size:26px; cursor:pointer; backdrop-filter:blur(4px); transition:all 0.15s ease;
+  }
+  .side-nav:hover{ border-color:var(--accent); color:var(--accent); background:rgba(12,13,16,0.8); }
+  .side-nav:disabled{ opacity:0.25; cursor:default; }
+  .side-nav:disabled:hover{ border-color:var(--line); color:var(--paper); background:rgba(12,13,16,0.55); }
+  .side-nav.left{ left:16px; }
+  .side-nav.right{ right:16px; }
+
+  .nav{ display:flex; align-items:center; justify-content:center; gap:18px; padding:16px 12px 26px; z-index:10; flex-wrap:wrap; }
+  .nav button{ background:transparent; border:1px solid var(--line); color:var(--paper); width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:16px; }
+  .nav button:hover{ border-color:var(--accent); color:var(--accent); }
+  .nav .counter{ font-size:12px; letter-spacing:0.08em; color:var(--paper-dim); min-width:70px; text-align:center; }
+  .nav .divider{ width:1px; height:22px; background:var(--line); }
+  .nav .zoom-controls{ display:flex; align-items:center; gap:10px; }
+  .nav .zoom-controls button{ width:34px; height:34px; font-size:15px; }
+  .nav .zoomLevel{ font-size:11px; letter-spacing:0.06em; color:var(--paper-dim); min-width:42px; text-align:center; }
+  .nav .jump-controls{ display:flex; align-items:center; gap:8px; }
+  .nav input.pageJump{ width:56px; padding:8px 6px; text-align:center; background:#17181c; border:1px solid #444; color:var(--paper);
+    border-radius:6px; font-size:12px; -webkit-user-select:text; user-select:text; -moz-appearance:textfield; }
+  .nav input.pageJump::-webkit-outer-spin-button, .nav input.pageJump::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .nav .jump-controls button{ width:auto; border-radius:6px; font-size:11px; padding:0 12px; }
+
+  @media (max-width: 640px){
+    .topbar{ padding:10px 14px; font-size:10px; flex-wrap:wrap; gap:4px; }
+    .stage{ padding:10px; }
+    .page-frame{ width:96vw; }
+    .side-nav{ width:44px; height:44px; font-size:18px; }
+    .side-nav.left{ left:6px; } .side-nav.right{ right:6px; }
+    .nav{ gap:10px; padding:12px 8px 20px; }
+    .nav button{ width:36px; height:36px; font-size:14px; }
+    .nav .counter{ min-width:54px; font-size:11px; }
+  }
+
+  #watermark{ position:fixed; inset:0; pointer-events:none; z-index:30; overflow:hidden; }
+  #watermark .row{ display:flex; white-space:nowrap; transform:rotate(-28deg) scale(1.4); opacity:0.1; font-size:12px;
+    letter-spacing:0.06em; color:#b1451c; margin-bottom:56px; }
+  #watermark .row span{ margin-right:50px; }
+
+  #shield{ position:fixed; inset:0; z-index:50; display:none; background:rgba(12,13,16,0.9); backdrop-filter: blur(26px);
+    align-items:center; justify-content:center; text-align:center; padding:24px; }
+  #shield p{ color:var(--paper-dim); font-size:13px; letter-spacing:0.06em; text-transform:uppercase; max-width:340px; line-height:1.8; }
+  body.blurred #viewer{ filter: blur(24px); }
+
+  ::selection{ background:transparent; }
+  @media print{ html, body { display:none !important; } }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="reel"></div>
+  <img src="images/logo.png" alt="IdeaRoute Films" class="logo">
+  <div class="sub">Film Pitch Deck Access | © 2026 IdeaRoute Films | For Consideration Only</div>
+  <input type="password" id="pwInput" placeholder="Enter your access code" autocomplete="off">
+  <br>
+  <button onclick="checkPassword()">Enter</button>
+  <div class="err" id="pwError"></div>
+  <div class="hint">This link and access code are issued to a single recipient.<br>Access is logged, IP-stamped, and every page is individually watermarked.<br>Do not forward this link or code.</div>
+</div>
+
+<div id="watermark"></div>
+<div id="shield"><p>Content hidden while window is not in focus.<br>Return to this tab to continue reading.</p></div>
+
+<div id="viewer">
+  <div class="topbar">
+    <span class="title"><img src="images/logo.png" alt="IdeaRoute Films" class="logo"> <span style="color:var(--paper-dim)">/// Film Pitch Deck</span></span>
+    
+    <div style="display:flex; align-items:center; gap:16px;">
+      <!-- Sound Toggle Button -->
+      <button id="audioBtn" onclick="toggleAudio()" style="background:transparent; border:1px solid var(--line); color:var(--paper-dim); border-radius:4px; padding:4px 10px; cursor:pointer; font-size:11px; font-family:var(--mono); text-transform:uppercase;">🔊 Sound: ON</button>
+      <span class="viewer-id" id="viewerIdLabel"></span>
+    </div>
+  </div>
+
+  <div class="stage">
+    <button class="side-nav left" id="sideLeft" onclick="prevPage()" aria-label="Previous page">&#8592;</button>
+    <div class="page-frame" id="pageFrame"><div class="capture-layer"></div></div>
+    <button class="side-nav right" id="sideRight" onclick="nextPage()" aria-label="Next page">&#8594;</button>
+  </div>
+  
+  <div class="nav">
+    <div class="jump-controls">
+      <input type="number" id="pageJumpInput" class="pageJump" min="1" placeholder="Pg">
+      <button onclick="jumpToPage()">Go</button>
+    </div>
+    <span class="counter" id="counter">1 / 1</span>
+    <div class="divider"></div>
+    <div class="zoom-controls">
+      <button onclick="zoomOut()" aria-label="Zoom out">&#8722;</button>
+      <span class="zoomLevel" id="zoomLevel">100%</span>
+      <button onclick="zoomIn()" aria-label="Zoom in">&#43;</button>
+      <button onclick="zoomReset()" style="width:auto;border-radius:6px;font-size:11px;padding:0 10px;">Reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- Looping Background Audio Bed (Correct HTML Placement) -->
+<audio id="bgAudio" src="audio/ost.mp3" loop preload="auto"></audio>
+
+<script>
+/* =====================================================================
+   CONFIG
+   ===================================================================== */
+
+const TOTAL_PAGES = 17;
+
+function pagePath(n){
+  return "images/page_" + String(n).padStart(2, "0") + ".png";
+}
+
+const PRODUCERS = {
+  "nadeesha": {
+    name: "Nadeesha Hemamali",
+    email: "NADEESHA HEMAMALI — CONFIDENTIAL — PREPARED FOR READ ONLY",
+    passwordHash: "f34e6570c54ab223a2e993a589b756bdc0a2532e8c176e9eb5a659e3fc449364" // password: n1d235ha
+  },
+  "nadeeshah": {
+    name: "Nadeesha Hemamali",
+    email: "NADEESHA HEMAMALI — CONFIDENTIAL — PREPARED FOR READ ONLY",
+    passwordHash: "f34e6570c54ab223a2e993a589b756bdc0a2532e8c176e9eb5a659e3fc449364" // password: n1d235ha
+  },
+  "demo": {
+    name: "Demo Reader",
+    email: "CONFIDENTIAL — PREPARED FOR READ ONLY",
+    passwordHash: "0ead2060b65992dca4769af601a1b3a35ef38cfad2c2c465bb160ea764157c5d" // password: demo1234
+  }
+};
+
+/* ===================================================================== */
+
+const params = new URLSearchParams(window.location.search);
+const id = (params.get('id') || '').trim();
+const record = PRODUCERS[id];
+
+const gate = document.getElementById('gate');
+const pwError = document.getElementById('pwError');
+const viewer = document.getElementById('viewer');
+
+if(!record){
+  gate.innerHTML = '<div style="color:#b1451c;max-width:360px;font-size:14px;line-height:1.7;">This link is not recognized.<br>Please request a valid personalized link from IdeaRoute Films.</div>';
+} else {
+  document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key === 'Enter') checkPassword(); });
+}
+
+async function sha256(text){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function checkPassword(){
+  const val = document.getElementById('pwInput').value;
+  const hash = await sha256(val);
+  if(hash === record.passwordHash){ unlock(); }
+  else { pwError.textContent = "Incorrect access code."; }
+}
+
+/* ---------- Audio Bed Controls ---------- */
+const bgAudio = document.getElementById('bgAudio');
+const audioBtn = document.getElementById('audioBtn');
+
+function startAudio() {
+  if (bgAudio) {
+    bgAudio.volume = 0.25; // Subtle ambient volume (25%)
+    bgAudio.play().catch(err => {
+      console.log("Audio play prevented or file missing:", err);
+    });
+  }
+}
+
+function toggleAudio() {
+  if (!bgAudio) return;
+  if (bgAudio.paused) {
+    bgAudio.play();
+    audioBtn.textContent = "🔊 Sound: ON";
+    audioBtn.style.color = "var(--paper-dim)";
+    audioBtn.style.borderColor = "var(--line)";
+  } else {
+    bgAudio.pause();
+    audioBtn.textContent = "🔇 Sound: OFF";
+    audioBtn.style.color = "var(--accent)";
+    audioBtn.style.borderColor = "var(--accent)";
+  }
+}
+
+async function unlock(){
+  gate.style.display = 'none';
+  viewer.style.display = 'flex';
+  document.getElementById('viewerIdLabel').textContent = record.name + ' · ' + record.email;
+  
+  // Start audio on password unlock
+  startAudio();
+
+  await buildWatermark();
+  attachProtections();
+  applyZoom();
+  currentPage = 1;
+  renderPage(1);
+}
+
+/* ---------- Watermark: viewer identity + IP + session timestamp ---------- */
+async function buildWatermark(){
+  let ip = 'IP unavailable';
+  try{
+    const res = await fetch('https://api.ipify.org?format=json');
+    const data = await res.json();
+    ip = data.ip;
+  }catch(e){}
+
+  const stamp = record.name + '  ·  ' + record.email + '  ·  IP ' + ip +
+                '  ·  ' + new Date().toISOString().slice(0,16).replace('T',' ') + '  ·  CONFIDENTIAL';
+  const wmContainer = document.getElementById('watermark');
+  for(let i=0;i<14;i++){
+    const row = document.createElement('div');
+    row.className = 'row';
+    for(let j=0;j<6;j++){
+      const span = document.createElement('span');
+      span.textContent = stamp;
+      row.appendChild(span);
+    }
+    wmContainer.appendChild(row);
+  }
+}
+
+/* ---------- Page navigation ---------- */
+let currentPage = 1;
+const pageFrame = document.getElementById('pageFrame');
+const counter = document.getElementById('counter');
+const sideLeft = document.getElementById('sideLeft');
+const sideRight = document.getElementById('sideRight');
+
+function renderPage(num){
+  pageFrame.style.backgroundImage = `url("${pagePath(num)}")`;
+  counter.textContent = num + ' / ' + TOTAL_PAGES;
+  sideLeft.disabled = (num <= 1);
+  sideRight.disabled = (num >= TOTAL_PAGES);
+}
+function nextPage(){ if(currentPage < TOTAL_PAGES){ currentPage++; renderPage(currentPage); } }
+function prevPage(){ if(currentPage > 1){ currentPage--; renderPage(currentPage); } }
+
+function jumpToPage(){
+  const input = document.getElementById('pageJumpInput');
+  let target = parseInt(input.value, 10);
+  if(isNaN(target)) return;
+  target = Math.max(1, Math.min(TOTAL_PAGES, target));
+  currentPage = target;
+  renderPage(currentPage);
+  input.value = '';
+}
+document.getElementById('pageJumpInput')?.addEventListener('keydown', e => {
+  if(e.key === 'Enter') jumpToPage();
+});
+
+/* ---------- Responsive sizing + zoom ---------- */
+let zoom = 1;
+const ZOOM_MIN = 0.6, ZOOM_MAX = 2.5, ZOOM_STEP = 0.2;
+
+function isMobileWidth(){ return window.innerWidth <= 640; }
+
+function baseWidthPx(){
+  const vw = window.innerWidth;
+  const cap = isMobileWidth() ? vw * 0.96 : Math.min(vw * 0.92, 1100);
+  return cap;
+}
+
+function applyZoom(){
+  const width = baseWidthPx() * zoom;
+  pageFrame.style.width = width + 'px';
+  document.getElementById('zoomLevel').textContent = Math.round(zoom * 100) + '%';
+}
+
+function zoomIn(){ zoom = Math.min(ZOOM_MAX, +(zoom + ZOOM_STEP).toFixed(2)); applyZoom(); }
+function zoomOut(){ zoom = Math.max(ZOOM_MIN, +(zoom - ZOOM_STEP).toFixed(2)); applyZoom(); }
+function zoomReset(){ zoom = 1; applyZoom(); }
+
+let lastWheelTurn = 0;
+document.addEventListener('wheel', function(e){
+  if(!viewer.style.display || viewer.style.display === 'none') return;
+  if(e.ctrlKey || e.metaKey){
+    e.preventDefault();
+    if(e.deltaY < 0) zoomIn(); else zoomOut();
+    return;
+  }
+  if(zoom <= 1){
+    const now = Date.now();
+    if(now - lastWheelTurn < 450) return;
+    if(Math.abs(e.deltaY) < 25) return;
+    lastWheelTurn = now;
+    if(e.deltaY > 0) nextPage(); else prevPage();
+  }
+}, { passive:false });
+
+let touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', function(e){
+  if(!viewer.style.display || viewer.style.display === 'none') return;
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive:true });
+
+document.addEventListener('touchend', function(e){
+  if(!viewer.style.display || viewer.style.display === 'none') return;
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5){
+    if(dx < 0) nextPage(); else prevPage();
+  }
+}, { passive:true });
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(applyZoom, 120);
+});
+
+/* ---------- Protections ---------- */
+function attachProtections(){
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+
+  document.addEventListener('keydown', function(e){
+    const k = e.key ? e.key.toLowerCase() : '';
+    if(k === 'arrowright') nextPage();
+    if(k === 'arrowleft') prevPage();
+    if(k === '+' || k === '=') zoomIn();
+    if(k === '-' || k === '_') zoomOut();
+    if(k === '0') zoomReset();
+    const blockedCombo = (e.ctrlKey || e.metaKey) && ['s','p','c','u'].includes(k);
+    const devtoolsKey = k === 'f12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(k));
+    if(blockedCombo || devtoolsKey) e.preventDefault();
+    if(k === 'printscreen') showShield(1200);
+  });
+
+  window.addEventListener('blur', () => showShield());
+  window.addEventListener('focus', () => { if(document.visibilityState === 'visible') hideShield(); });
+  document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden') showShield(); });
+
+  let devtoolsWarned = false;
+  setInterval(function(){
+    const threshold = 160;
+    const widthGap = window.outerWidth - window.innerWidth > threshold;
+    const heightGap = window.outerHeight - window.innerHeight > threshold;
+    if((widthGap || heightGap) && !devtoolsWarned){ devtoolsWarned = true; showShield(); }
+  }, 1000);
+
+  function showShield(autoHideMs){
+    document.body.classList.add('blurred');
+    document.getElementById('shield').style.display = 'flex';
+    if(autoHideMs) setTimeout(hideShield, autoHideMs);
+  }
+  function hideShield(){
+    document.body.classList.remove('blurred');
+    document.getElementById('shield').style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>
